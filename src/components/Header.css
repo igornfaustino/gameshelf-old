@@ -1,0 +1,29 @@
+.site-page-header {
+  background-color: #444;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-title {
+  margin: 0 !important;
+  font-size: 24px !important;
+}
+
+.site-page-header .search {
+  background-color: transparent !important;
+}
+
+.site-page-header input {
+  background-color: transparent !important;
+  color: #fff;
+}
+
+.ant-page-header-heading-title {
+  text-overflow: initial;
+  overflow: initial;
+}
+
+.ant-page-header-heading-sub-title {
+  /* display: none; */
+}
