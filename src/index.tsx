@@ -1,12 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from '@apollo/react-hooks';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+const client = new ApolloClient({
+  uri: 'https://gameshelf-backend.herokuapp.com/graphql',
+  request: (operation) => {
+    const token = localStorage.getItem('token');
+    operation.setContext({
+      headers: {
+        authorization: token ? `${token}` : '',
+      },
+    });
+  },
+});
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
