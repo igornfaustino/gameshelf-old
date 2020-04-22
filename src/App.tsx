@@ -14,7 +14,7 @@ function App() {
     <Router>
       <Layout>
         <Header />
-        <Content style={{ padding: '0 100px' }}>
+        <Content style={{ padding: '0 100px', marginTop: 64 }}>
           <Routes />
         </Content>
         <Footer style={{ textAlign: 'center' }}>

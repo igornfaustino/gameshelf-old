@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 
+import { Button } from 'antd';
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 
 import useRouteQuery from '../hooks/useQuery';
+import Game from '../components/Game';
+import { GameType } from '../types/common';
+import styles from './Search.module.scss';
+import FilterForm from '../components/FilterForm';
 
 const SEARCH_GAME = gql`
   query searchGames(
@@ -20,60 +25,99 @@ const SEARCH_GAME = gql`
       limit: $limit
       offset: $offset
     ) {
-      id
-      name
-      coverURL
-      genres {
+      count
+      games {
         id
         name
+        coverURL
+        genres {
+          id
+          name
+        }
+        platforms {
+          id
+          name
+        }
+        similarGames
       }
-      platforms {
-        id
-        name
-      }
-      similarGames
     }
   }
 `;
 
-interface Platform {
-  id: string;
-  name: string;
-  abbreviation?: string;
-}
-
-interface Genres {
-  id: string;
-  name: string;
-}
-
-interface Game {
-  id: string;
-  name: string;
-  coverURL?: string;
-  genresId?: number[];
-  genres?: Genres[];
-  platforms?: Platform[];
-  platformsId?: number[];
-  similarGames?: number[];
-}
-
 interface Query {
-  searchGames: Game[];
+  searchGames: {
+    games: GameType[];
+    count: number;
+  };
 }
 
-function Search() {
+const LIMIT = 30;
+
+const Search: React.FC = () => {
+  const [offset, setOffset] = useState(0);
+  const [platforms, setPlatforms] = useState<undefined | number[]>(undefined);
+  const [genres, setGenres] = useState<undefined | number[]>(undefined);
+
   const query = useRouteQuery();
   const { loading, error, data } = useQuery<Query>(SEARCH_GAME, {
-    variables: { search: query.get('q') },
+    variables: {
+      search: query.get('q'),
+      offset,
+      limit: LIMIT,
+      platforms,
+      genres,
+    },
     skip: !query.get('q'),
   });
 
-  if (!query.get('q')) return <div>Sem query</div>;
+  const games = useMemo(
+    () => data?.searchGames.games.map((game) => <Game key={game.id} {...game} />),
+    [data]
+  );
 
-  console.log(data);
+  const resultCount = useMemo(() => {
+    const count = data?.searchGames.count || 0;
+    return (
+      <div>
+        Found <b>{count}</b> games for this search
+      </div>
+    );
+  }, [data]);
 
-  return <div className="site-layout-content">{query.get('q')}</div>;
-}
+  const pagination = useMemo(() => {
+    const count = data?.searchGames.count || 0;
+    const numberOfPages = Math.ceil(count / LIMIT);
+    const pageButtons = [];
+    const activeButton = offset / LIMIT;
+    for (let i = 0; i < numberOfPages; i++) {
+      const button = (
+        <Button
+          key={i}
+          type={activeButton === i ? 'primary' : 'default'}
+          onClick={(): void => setOffset(LIMIT * i)}
+        >
+          {i + 1}
+        </Button>
+      );
+      pageButtons.push(button);
+    }
+    return pageButtons;
+  }, [data, offset]);
+
+  useEffect(() => {
+    setOffset(0);
+  }, [query.get('q'), platforms, genres]);
+
+  return (
+    <div className={styles.content}>
+      <div className={styles['content-header']}>
+        {resultCount}
+        <FilterForm setPlatforms={setPlatforms} setGenres={setGenres} />
+      </div>
+      <div className={styles.games}>{games}</div>
+      <div className={styles.pages}>{pagination}</div>
+    </div>
+  );
+};
 
 export default Search;
