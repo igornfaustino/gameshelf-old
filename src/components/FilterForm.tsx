@@ -104,6 +104,7 @@ const FilterForm: React.FC<FormProps> = ({ setPlatforms, setGenres }) => {
         mode="multiple"
         style={{ width: '100%' }}
         placeholder="Select a game genre"
+        optionFilterProp="children"
         onChange={handleGenreSelect}
       >
         {genreOptions}
