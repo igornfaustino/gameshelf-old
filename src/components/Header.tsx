@@ -1,12 +1,12 @@
 import React, { useMemo, useCallback } from 'react';
 
-import { Layout, Input, Typography } from 'antd';
-
-import './Header.css';
 import { useHistory } from 'react-router-dom';
+import { Layout, Input, Typography, Button } from 'antd';
+
+import styles from './Header.module.scss';
 
 const { Search } = Input;
-const { Title } = Typography;
+const { Text } = Typography;
 const { Header: HeaderAntd } = Layout;
 
 const Header: React.FC = () => {
@@ -19,21 +19,59 @@ const Header: React.FC = () => {
     [history]
   );
 
+  const handleLoginClick = useCallback(() => {
+    history.push('/login');
+  }, [history]);
+
+  const handleSingUpClick = useCallback(() => {
+    history.push('/singup');
+  }, [history]);
+
+  const handleBrandClick = useCallback(() => history.push('/'), [history]);
+  const handleLogout = useCallback(() => {
+    localStorage.clear();
+    return history.push('/');
+  }, [history]);
+
   const search = useMemo(
-    () => <Search placeholder="input search text" onSearch={handleSearch} className="search" />,
-    []
+    () => (
+      <Search placeholder="input search text" onSearch={handleSearch} className={styles.search} />
+    ),
+    [handleSearch]
   );
 
-  // const menu = useMemo(() => [<Text>Login</Text>, <Text>Sing up</Text>], []);
+  const menu = useMemo(() => {
+    const offlineMenu = [
+      <Button type="link" key="login" onClick={handleLoginClick}>
+        Login
+      </Button>,
+      <Button type="link" key="singup" onClick={handleSingUpClick}>
+        Sing Up
+      </Button>,
+    ];
+    const onlineMenu = [
+      <Button type="link" key="logout" onClick={handleLogout}>
+        Logout
+      </Button>,
+    ];
+    const hasToken = localStorage.getItem('token') || false;
+    return hasToken ? onlineMenu : offlineMenu;
+  }, [history, localStorage.getItem('token')]);
 
   return (
-    <HeaderAntd className="site-page-header">
-      <div>
-        <Title level={1} className="header-title">
-          GAMESHELF
-        </Title>
+    <HeaderAntd className={styles['site-page-header']}>
+      <Button
+        type="link"
+        className={styles['header-title']}
+        size="large"
+        onClick={handleBrandClick}
+      >
+        GAMESHELF
+      </Button>
+      <div className={styles['header-menu']}>
+        <div>{search}</div>
+        <div>{menu}</div>
       </div>
-      <div>{search}</div>
     </HeaderAntd>
   );
 };
