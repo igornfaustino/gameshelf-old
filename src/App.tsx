@@ -9,7 +9,7 @@ import Routes from './routes';
 
 const { Footer, Content } = Layout;
 
-function App() {
+const App: React.FC = () => {
   return (
     <Router>
       <Layout>
@@ -23,6 +23,6 @@ function App() {
       </Layout>
     </Router>
   );
-}
+};
 
 export default App;
