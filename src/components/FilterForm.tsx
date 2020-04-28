@@ -52,7 +52,7 @@ const FilterForm: React.FC<FormProps> = ({ setPlatforms, setGenres }) => {
     () =>
       platformData?.platforms.map((platform) => (
         <Option key={platform.id} value={platform.id}>
-          {platform.abbreviation || platform.name}
+          {platform.name}
         </Option>
       )),
     [platformData]
