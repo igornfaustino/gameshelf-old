@@ -37,6 +37,7 @@ const SEARCH_GAME = gql`
         platforms {
           id
           name
+          abbreviation
         }
         similarGames
       }
@@ -107,6 +108,8 @@ const Search: React.FC = () => {
   useEffect(() => {
     setOffset(0);
   }, [query.get('q'), platforms, genres]);
+
+  console.log({ error });
 
   return (
     <div className={styles.content}>

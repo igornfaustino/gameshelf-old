@@ -1,0 +1,40 @@
+:global(.ant-modal-close) {
+  color: #777;
+}
+
+.modal {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 16px;
+}
+
+.modal-btn {
+  display: flex;
+  flex-direction: column;
+  box-sizing: content-box;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  cursor: pointer;
+
+  img {
+    height: 80px;
+  }
+
+  span {
+    margin-left: 0 !important;
+  }
+
+  &:hover {
+    color: #00b27b;
+    border-color: #00b27b;
+    transform: scale(1.03);
+  }
+}
+
+.margin {
+  margin-bottom: 8px;
+}
