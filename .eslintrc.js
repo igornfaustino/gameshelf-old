@@ -31,7 +31,7 @@ module.exports = {
     sourceType: 'module',
   },
   ignorePatterns: ['react-app-env.d.ts', 'serviceWorker.ts'],
-  plugins: ['react', '@typescript-eslint', 'prettier'],
+  plugins: ['react', '@typescript-eslint', 'prettier', 'react-hooks'],
   rules: {
     'prettier/prettier': ['error'],
     'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.jsx'] }],
@@ -41,5 +41,8 @@ module.exports = {
     'react/jsx-one-expression-per-line': 'off',
     'no-plusplus': [1, { allowForLoopAfterthoughts: true }],
     'react/prop-types': 'off',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'react-hooks/exhaustive-deps': 'warn',
+    'react/jsx-curly-newline': 'off',
   },
 };
