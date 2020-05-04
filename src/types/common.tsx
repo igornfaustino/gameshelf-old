@@ -18,4 +18,10 @@ export interface GameType {
   platforms?: Platform[];
   platformsId?: number[];
   similarGames?: number[];
+  userList?: string;
+}
+
+export interface GameAndList {
+  gameId: number;
+  userList: string;
 }

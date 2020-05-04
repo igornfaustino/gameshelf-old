@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, Dispatch, SetStateAction } from 'react';
 
 import { gql } from 'apollo-boost';
 import { Modal, Button } from 'antd';
@@ -69,9 +69,15 @@ interface Props {
   isModalVisible: boolean;
   handleModal: () => void;
   game: GameType;
+  setLocalListInfo: Dispatch<SetStateAction<string>>;
 }
 
-const AddGameToListModal: React.FC<Props> = ({ isModalVisible, handleModal, game }) => {
+const AddGameToListModal: React.FC<Props> = ({
+  isModalVisible,
+  handleModal,
+  game,
+  setLocalListInfo,
+}) => {
   const history = useHistory();
   const { data } = useQuery<ListQuery>(GET_LISTS);
   const [addOrMoveGameToList] = useMutation<AddGameMutation>(ADD_GAME);
@@ -99,10 +105,11 @@ const AddGameToListModal: React.FC<Props> = ({ isModalVisible, handleModal, game
             addOrMoveGameToList({ variables: { listId: list.id, ...gameToAdd } })
               .then(({ data: mutationResult, errors }) => {
                 if (errors || !mutationResult || !mutationResult.addOrMoveGameToList) throw errors;
-
+                setLocalListInfo(list.name);
                 handleModal();
               })
-              .catch(() => {
+              .catch((err) => {
+                console.log({ err });
                 alert('ops, something goes wrong');
               })
           }

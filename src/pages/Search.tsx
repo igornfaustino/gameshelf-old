@@ -6,9 +6,10 @@ import { useQuery } from '@apollo/react-hooks';
 
 import useRouteQuery from '../hooks/useQuery';
 import Game from '../components/Game';
-import { GameType } from '../types/common';
+import { GameType, GameAndList } from '../types/common';
 import styles from './Search.module.scss';
 import FilterForm from '../components/FilterForm';
+import { joinGamesAndCachedInfo } from '../helpers/common';
 
 const SEARCH_GAME = gql`
   query searchGames(
@@ -40,6 +41,7 @@ const SEARCH_GAME = gql`
           abbreviation
         }
         similarGames
+        userList
       }
     }
   }
@@ -58,22 +60,26 @@ const Search: React.FC = () => {
   const [offset, setOffset] = useState(0);
   const [platforms, setPlatforms] = useState<undefined | number[]>(undefined);
   const [genres, setGenres] = useState<undefined | number[]>(undefined);
+  const [cacheGameList, setCacheGameList] = useState<GameAndList[]>([]);
+  const [games, setGames] = useState<GameType[]>([]);
 
   const query = useRouteQuery();
+  const gameQuery = query.get('q');
+
   const { loading, error, data } = useQuery<Query>(SEARCH_GAME, {
     variables: {
-      search: query.get('q'),
+      search: gameQuery,
       offset,
       limit: LIMIT,
       platforms,
       genres,
     },
-    skip: !query.get('q'),
+    skip: !gameQuery,
   });
 
-  const games = useMemo(
-    () => data?.searchGames.games.map((game) => <Game key={game.id} {...game} />),
-    [data]
+  const gameCards = useMemo(
+    () => games.map((game) => <Game key={game.id} {...game} setCacheGameList={setCacheGameList} />),
+    [games]
   );
 
   const resultCount = useMemo(() => {
@@ -95,7 +101,10 @@ const Search: React.FC = () => {
         <Button
           key={i}
           type={activeButton === i ? 'primary' : 'default'}
-          onClick={(): void => setOffset(LIMIT * i)}
+          onClick={(): void => {
+            setOffset(LIMIT * i);
+            window.scrollTo(0, 0);
+          }}
         >
           {i + 1}
         </Button>
@@ -107,9 +116,15 @@ const Search: React.FC = () => {
 
   useEffect(() => {
     setOffset(0);
-  }, [query.get('q'), platforms, genres]);
+  }, [gameQuery, platforms, genres]);
 
-  console.log({ error });
+  useEffect(() => {
+    const searchedGames = data?.searchGames.games;
+    if (!searchedGames) return setGames([]);
+    return setGames(joinGamesAndCachedInfo(searchedGames, cacheGameList));
+  }, [cacheGameList, data]);
+
+  if (loading) return <div>Loading</div>;
 
   return (
     <div className={styles.content}>
@@ -117,7 +132,7 @@ const Search: React.FC = () => {
         {resultCount}
         <FilterForm setPlatforms={setPlatforms} setGenres={setGenres} />
       </div>
-      <div className={styles.games}>{games}</div>
+      <div className={styles.games}>{gameCards}</div>
       <div className={styles.pages}>{pagination}</div>
     </div>
   );
