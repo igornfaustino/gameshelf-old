@@ -10,6 +10,7 @@ const { Text } = Typography;
 const { Header: HeaderAntd } = Layout;
 
 const Header: React.FC = () => {
+  const token = localStorage.getItem('token');
   const history = useHistory();
 
   const handleSearch = useCallback(
@@ -21,6 +22,10 @@ const Header: React.FC = () => {
 
   const handleLoginClick = useCallback(() => {
     history.push('/login');
+  }, [history]);
+
+  const handleList = useCallback(() => {
+    history.push('/lists');
   }, [history]);
 
   const handleSingUpClick = useCallback(() => {
@@ -50,13 +55,16 @@ const Header: React.FC = () => {
       </Button>,
     ];
     const onlineMenu = [
+      <Button type="link" key="lists" onClick={handleList}>
+        My Lists
+      </Button>,
       <Button type="link" key="logout" onClick={handleLogout}>
         Logout
       </Button>,
     ];
-    const hasToken = localStorage.getItem('token') || false;
+    const hasToken = token || false;
     return hasToken ? onlineMenu : offlineMenu;
-  }, [history, localStorage.getItem('token')]);
+  }, [handleList, handleLoginClick, handleLogout, handleSingUpClick, token]);
 
   return (
     <HeaderAntd className={styles['site-page-header']}>

@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Search from './pages/Search';
 import Login from './pages/Login';
 import SingUp from './pages/SingUp';
+import Lists from './pages/Lists';
 // import { Login } from './pages/Login/Login';
 // import Register from './pages/Register/Register';
 // import Profile from './pages/Profile/Profile';
@@ -15,6 +16,7 @@ const Routes: React.FC = () => {
       <Route path="/login" component={Login} />
       <Route path="/singup" component={SingUp} />
       <Route path="/search" component={Search} />
+      <Route path="/lists" component={Lists} />
     </Switch>
   );
 };
