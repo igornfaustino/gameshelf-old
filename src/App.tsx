@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Layout } from 'antd';
 
-import './App.css';
+import styles from './App.module.scss';
 import Header from './components/Header';
 import Routes from './routes';
 
@@ -12,9 +12,9 @@ const { Footer, Content } = Layout;
 const App: React.FC = () => {
   return (
     <Router>
-      <Layout>
+      <Layout style={{ width: '100%' }}>
         <Header />
-        <Content style={{ padding: '0 100px', marginTop: 64 }}>
+        <Content className={styles.content}>
           <Routes />
         </Content>
         <Footer style={{ textAlign: 'center' }}>

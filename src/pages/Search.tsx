@@ -114,6 +114,19 @@ const Search: React.FC = () => {
     return pageButtons;
   }, [data, offset]);
 
+  const searchResult = useMemo(
+    () =>
+      loading ? (
+        <div>Loading</div>
+      ) : (
+        <>
+          <div className={styles.games}>{gameCards}</div>
+          <div className={styles.pages}>{pagination}</div>
+        </>
+      ),
+    [gameCards, loading, pagination]
+  );
+
   useEffect(() => {
     setOffset(0);
   }, [gameQuery, platforms, genres]);
@@ -124,16 +137,13 @@ const Search: React.FC = () => {
     return setGames(joinGamesAndCachedInfo(searchedGames, cacheGameList));
   }, [cacheGameList, data]);
 
-  if (loading) return <div>Loading</div>;
-
   return (
     <div className={styles.content}>
       <div className={styles['content-header']}>
         {resultCount}
         <FilterForm setPlatforms={setPlatforms} setGenres={setGenres} />
       </div>
-      <div className={styles.games}>{gameCards}</div>
-      <div className={styles.pages}>{pagination}</div>
+      {searchResult}
     </div>
   );
 };

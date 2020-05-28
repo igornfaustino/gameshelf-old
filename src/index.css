@@ -16,3 +16,8 @@ code {
   min-height: 70vh;
   margin-top: 16px;
 }
+
+* {
+  box-sizing: border-box;
+  /* font-size: 18px; */
+}

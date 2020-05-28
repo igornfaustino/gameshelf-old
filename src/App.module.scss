@@ -9,3 +9,12 @@
 .site-layout-background {
   background: #fff;
 }
+
+.content {
+  padding: 0 100px;
+  margin-top: 64px;
+
+  @media (max-width: 875px) {
+    padding: 0;
+  }
+}

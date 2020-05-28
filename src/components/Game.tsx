@@ -59,7 +59,7 @@ const Game: React.FC<GameCard> = ({ setCacheGameList, ...game }) => {
         <img src={`https://${game.coverURL}`} alt={`${game.name} cover`} />
       </div>
       <div>
-        <b>{game.name}</b>
+        <p className={styles.title}>{game.name}</p>
         <p className={styles.platforms}>{platformsTag}</p>
       </div>
       <Button icon={<PlusCircleFilled />} type="primary" onClick={handleModal}>

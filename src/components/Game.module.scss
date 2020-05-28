@@ -7,7 +7,11 @@
   flex-direction: column;
   justify-content: space-between;
 
-  @media screen {
+  .title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
   }
 
   &:hover {
@@ -36,7 +40,9 @@
       display: block;
       max-height: 100%;
       margin: auto;
-      max-width: 100%;
+      // max-width: 100%;
+      max-height: 352px;
+      width: 100%;
     }
   }
 
