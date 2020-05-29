@@ -1,4 +1,8 @@
 import { GameType, GameAndList } from '../types/common';
+import TO_PLAY_IMG from '../assets/003-bookshelf.svg';
+import PLAYING_IMG from '../assets/001-game-controller.svg';
+import COMPLETED_IMG from '../assets/002-award.svg';
+import ABANDONED_IMG from '../assets/004-spider-web.svg';
 
 // eslint-disable-next-line import/prefer-default-export
 export function binarySearch<T>(
@@ -33,4 +37,11 @@ export const joinGamesAndCachedInfo = (games: GameType[], cached: GameAndList[])
     if (!cachedInfo) return game;
     return { ...game, userList: cachedInfo.userList };
   });
+};
+
+export const LIST_ICONS: { [index: string]: string } = {
+  'To Play': TO_PLAY_IMG,
+  Playing: PLAYING_IMG,
+  Completed: COMPLETED_IMG,
+  Abandoned: ABANDONED_IMG,
 };

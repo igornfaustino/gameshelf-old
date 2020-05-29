@@ -4,11 +4,36 @@
   min-height: 70vh;
   margin-top: 16px;
   height: 100%;
+  overflow: auto;
+
+  @media (max-width: 600px) {
+    padding: 16px;
+  }
 
   .content-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
   }
 
   form {
@@ -39,5 +64,22 @@
   margin-top: 16px;
   button {
     margin: 2px;
+  }
+}
+
+.sider {
+  background-color: #fff;
+  border-right: 1px solid #f0f0f0;
+}
+
+.icon {
+  margin-right: 8px;
+}
+
+.menuText {
+  font-weight: bold;
+
+  @media (max-width: 600px) {
+    display: none;
   }
 }

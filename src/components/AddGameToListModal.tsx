@@ -8,11 +8,8 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 
 import styles from './AddGameToListModal.module.scss';
 
-import TO_PLAY_IMG from '../assets/003-bookshelf.svg';
-import PLAYING_IMG from '../assets/001-game-controller.svg';
-import COMPLETED_IMG from '../assets/002-award.svg';
-import ABANDONED_IMG from '../assets/004-spider-web.svg';
 import { GameType } from '../types/common';
+import { LIST_ICONS } from '../helpers/common';
 
 const GET_LISTS = gql`
   {
@@ -44,13 +41,6 @@ const ADD_GAME = gql`
     )
   }
 `;
-
-const BTN_IMG: { [index: string]: string } = {
-  'To Play': TO_PLAY_IMG,
-  Playing: PLAYING_IMG,
-  Completed: COMPLETED_IMG,
-  Abandoned: ABANDONED_IMG,
-};
 
 interface ListData {
   id: number;
@@ -110,15 +100,14 @@ const AddGameToListModal: React.FC<Props> = ({
               })
               .catch((err) => {
                 console.log({ err });
-                alert('ops, something goes wrong');
               })
           }
         >
-          <img src={BTN_IMG[list.name] || ''} alt={list.name} />
+          <img src={LIST_ICONS[list.name] || ''} alt={list.name} />
           {list.name}
         </div>
       )),
-    [addOrMoveGameToList, data, gameToAdd, handleModal]
+    [addOrMoveGameToList, data, gameToAdd, handleModal, setLocalListInfo]
   );
 
   const modalContent = useMemo(() => {

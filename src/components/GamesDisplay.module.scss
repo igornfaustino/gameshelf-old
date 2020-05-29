@@ -5,4 +5,12 @@
   margin: auto;
   justify-items: center;
   justify-content: center;
+
+  @media (max-width: 1600px) {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 230px));
+  }
+
+  @media (max-width: 1440px) {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 200px));
+  }
 }

@@ -17,6 +17,11 @@ const Game: React.FC<GameCard> = ({ setCacheGameList, ...game }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [localListInfo, setLocalListInfo] = useState('');
 
+  const platformsString = useMemo(
+    () => game.platforms?.map((platform) => platform.name).join(', '),
+    [game.platforms]
+  );
+
   const platformsTag = useMemo(
     () =>
       game.platforms?.map((platform) => (
@@ -60,7 +65,10 @@ const Game: React.FC<GameCard> = ({ setCacheGameList, ...game }) => {
       </div>
       <div>
         <p className={styles.title}>{game.name}</p>
-        <p className={styles.platforms}>{platformsTag}</p>
+        <p className={styles.platforms}>
+          {platformsTag}
+          <span className={styles.tooltip}>{platformsString}</span>
+        </p>
       </div>
       <Button icon={<PlusCircleFilled />} type="primary" onClick={handleModal}>
         Add to
