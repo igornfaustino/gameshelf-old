@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/react-hooks';
 
 import { GameType, GameAndList } from '../types/common';
 import GamesDisplay from '../components/GamesDisplay';
-import { joinGamesAndCachedInfo } from '../helpers/common';
+import { filterGamesThatAreNoLongOnTheList } from '../helpers/common';
 
 interface ListContentType {
   listId: string;
@@ -51,8 +51,9 @@ const ListContent: React.FC<ListContentType> = ({ listId }) => {
   useEffect(() => {
     const gamesOnList = data?.getGamesFromList;
     if (!gamesOnList) return setGames([]);
-    return setGames(joinGamesAndCachedInfo(gamesOnList, cacheGameList));
-  }, [cacheGameList, data]);
+    console.log(listId);
+    return setGames(filterGamesThatAreNoLongOnTheList(gamesOnList, cacheGameList, listId));
+  }, [cacheGameList, data, listId]);
 
   return (
     <>

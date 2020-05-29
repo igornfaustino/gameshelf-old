@@ -67,7 +67,7 @@ const Search: React.FC = () => {
   const query = useRouteQuery();
   const gameQuery = query.get('q');
 
-  const { loading, error, data } = useQuery<Query>(SEARCH_GAME, {
+  const { loading, error, data, refetch } = useQuery<Query>(SEARCH_GAME, {
     variables: {
       search: gameQuery,
       offset,
@@ -129,10 +129,13 @@ const Search: React.FC = () => {
 
   useEffect(() => {
     const searchedGames = data?.searchGames.games;
-    console.log(searchedGames);
     if (!searchedGames) return setGames([]);
     return setGames(joinGamesAndCachedInfo(searchedGames, cacheGameList));
   }, [cacheGameList, data]);
+
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   return (
     <div className={styles.content}>

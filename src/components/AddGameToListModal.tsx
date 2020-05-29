@@ -60,6 +60,7 @@ interface Props {
   handleModal: () => void;
   game: GameType;
   setLocalListInfo: Dispatch<SetStateAction<string>>;
+  setLocalListId: Dispatch<SetStateAction<string>>;
 }
 
 const AddGameToListModal: React.FC<Props> = ({
@@ -67,6 +68,7 @@ const AddGameToListModal: React.FC<Props> = ({
   handleModal,
   game,
   setLocalListInfo,
+  setLocalListId,
 }) => {
   const history = useHistory();
   const { data } = useQuery<ListQuery>(GET_LISTS);
@@ -96,6 +98,8 @@ const AddGameToListModal: React.FC<Props> = ({
               .then(({ data: mutationResult, errors }) => {
                 if (errors || !mutationResult || !mutationResult.addOrMoveGameToList) throw errors;
                 setLocalListInfo(list.name);
+                console.log({ listId: list.id });
+                setLocalListId(list.id.toString());
                 handleModal();
               })
               .catch((err) => {
@@ -107,7 +111,7 @@ const AddGameToListModal: React.FC<Props> = ({
           {list.name}
         </div>
       )),
-    [addOrMoveGameToList, data, gameToAdd, handleModal, setLocalListInfo]
+    [addOrMoveGameToList, data, gameToAdd, handleModal, setLocalListId, setLocalListInfo]
   );
 
   const modalContent = useMemo(() => {

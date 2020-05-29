@@ -39,6 +39,28 @@ export const joinGamesAndCachedInfo = (games: GameType[], cached: GameAndList[])
   });
 };
 
+export const filterGamesThatAreNoLongOnTheList = (
+  games: GameType[],
+  cached: GameAndList[],
+  currentListId: string
+): GameType[] => {
+  console.log(cached);
+  const sortedCached = cached.sort((a, b) => a.gameId - b.gameId);
+  return games
+    .map((game) => {
+      const cachedInfo = binarySearch<GameAndList>(
+        sortedCached,
+        Number(game.id),
+        (element) => element.gameId
+      );
+      if (!cachedInfo) return game;
+      console.log({ currentListId, listId: cachedInfo });
+      if (cachedInfo.listId === currentListId) return game;
+      return undefined;
+    })
+    .filter((game) => game !== undefined) as GameType[];
+};
+
 export const LIST_ICONS: { [index: string]: string } = {
   'To Play': TO_PLAY_IMG,
   Playing: PLAYING_IMG,

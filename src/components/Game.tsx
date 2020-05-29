@@ -16,6 +16,7 @@ const Game: React.FC<GameCard> = ({ setCacheGameList, ...game }) => {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [localListInfo, setLocalListInfo] = useState('');
+  const [localListId, setLocalListId] = useState('');
 
   const platformsString = useMemo(
     () => game.platforms?.map((platform) => platform.name).join(', '),
@@ -48,6 +49,7 @@ const Game: React.FC<GameCard> = ({ setCacheGameList, ...game }) => {
       const newEntry = {
         gameId: Number(game.id),
         userList: localListInfo,
+        listId: localListId,
       };
 
       const otherCachedValues = prev.filter(
@@ -55,7 +57,7 @@ const Game: React.FC<GameCard> = ({ setCacheGameList, ...game }) => {
       );
       return [...otherCachedValues, newEntry];
     });
-  }, [game.id, localListInfo, setCacheGameList]);
+  }, [game.id, localListId, localListInfo, setCacheGameList]);
 
   return (
     <div className={styles['game-card']}>
@@ -78,6 +80,7 @@ const Game: React.FC<GameCard> = ({ setCacheGameList, ...game }) => {
         isModalVisible={isModalVisible}
         game={game}
         setLocalListInfo={setLocalListInfo}
+        setLocalListId={setLocalListId}
       />
     </div>
   );

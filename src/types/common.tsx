@@ -24,4 +24,5 @@ export interface GameType {
 export interface GameAndList {
   gameId: number;
   userList: string;
+  listId: string;
 }
