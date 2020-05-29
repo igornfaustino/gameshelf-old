@@ -41,15 +41,6 @@
   }
 }
 
-.games {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 262px));
-  grid-gap: 16px;
-  margin: auto;
-  justify-items: center;
-  justify-content: center;
-}
-
 .pages {
   display: flex;
   justify-content: flex-end;

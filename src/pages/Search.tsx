@@ -10,6 +10,7 @@ import { GameType, GameAndList } from '../types/common';
 import styles from './Search.module.scss';
 import FilterForm from '../components/FilterForm';
 import { joinGamesAndCachedInfo } from '../helpers/common';
+import GamesDisplay from '../components/GamesDisplay';
 
 const SEARCH_GAME = gql`
   query searchGames(
@@ -77,11 +78,6 @@ const Search: React.FC = () => {
     skip: !gameQuery,
   });
 
-  const gameCards = useMemo(
-    () => games.map((game) => <Game key={game.id} {...game} setCacheGameList={setCacheGameList} />),
-    [games]
-  );
-
   const resultCount = useMemo(() => {
     const count = data?.searchGames.count || 0;
     return (
@@ -120,11 +116,11 @@ const Search: React.FC = () => {
         <div>Loading</div>
       ) : (
         <>
-          <div className={styles.games}>{gameCards}</div>
+          <GamesDisplay games={games} setCacheGameList={setCacheGameList} />
           <div className={styles.pages}>{pagination}</div>
         </>
       ),
-    [gameCards, loading, pagination]
+    [games, loading, pagination]
   );
 
   useEffect(() => {
@@ -133,6 +129,7 @@ const Search: React.FC = () => {
 
   useEffect(() => {
     const searchedGames = data?.searchGames.games;
+    console.log(searchedGames);
     if (!searchedGames) return setGames([]);
     return setGames(joinGamesAndCachedInfo(searchedGames, cacheGameList));
   }, [cacheGameList, data]);
