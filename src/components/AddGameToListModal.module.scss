@@ -33,6 +33,22 @@
     border-color: #00b27b;
     transform: scale(1.03);
   }
+
+  &--disabled {
+    cursor: initial;
+    transform: scale(0.9);
+    color: #999;
+
+    img {
+      opacity: 0.5;
+    }
+
+    &:hover {
+      color: #999;
+      border-color: #ddd;
+      transform: scale(0.9);
+    }
+  }
 }
 
 .margin {

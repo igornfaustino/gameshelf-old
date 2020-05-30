@@ -35,7 +35,7 @@ export const joinGamesAndCachedInfo = (games: GameType[], cached: GameAndList[])
       (element) => element.gameId
     );
     if (!cachedInfo) return game;
-    return { ...game, userList: cachedInfo.userList };
+    return { ...game, userList: cachedInfo.userList, userListId: cachedInfo.listId };
   });
 };
 
@@ -44,7 +44,6 @@ export const filterGamesThatAreNoLongOnTheList = (
   cached: GameAndList[],
   currentListId: string
 ): GameType[] => {
-  console.log(cached);
   const sortedCached = cached.sort((a, b) => a.gameId - b.gameId);
   return games
     .map((game) => {
@@ -53,9 +52,9 @@ export const filterGamesThatAreNoLongOnTheList = (
         Number(game.id),
         (element) => element.gameId
       );
-      if (!cachedInfo) return game;
-      console.log({ currentListId, listId: cachedInfo });
-      if (cachedInfo.listId === currentListId) return game;
+      if (!cachedInfo) return { ...game, userListId: currentListId };
+      if (cachedInfo.listId === currentListId)
+        return { ...game, userList: cachedInfo.userList, userListId: cachedInfo.listId };
       return undefined;
     })
     .filter((game) => game !== undefined) as GameType[];

@@ -19,6 +19,7 @@ export interface GameType {
   platformsId?: number[];
   similarGames?: number[];
   userList?: string;
+  userListId?: string;
 }
 
 export interface GameAndList {

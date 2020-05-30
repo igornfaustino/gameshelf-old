@@ -57,7 +57,7 @@ const ListContent: React.FC<ListContentType> = ({ listId }) => {
 
   return (
     <>
-      <GamesDisplay games={games} setCacheGameList={setCacheGameList} />
+      <GamesDisplay games={games} setCacheGameList={setCacheGameList} isGamesOnList={true} />
     </>
   );
 };

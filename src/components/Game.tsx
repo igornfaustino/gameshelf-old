@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useCallback, useEffect } from 'react';
 
 import { Button, Tag } from 'antd';
-import { PlusCircleFilled } from '@ant-design/icons';
+import { PlusCircleFilled, RightCircleOutlined } from '@ant-design/icons';
 
 import { GameType, GameAndList } from '../types/common';
 import styles from './Game.module.scss';
@@ -9,9 +9,10 @@ import AddGameToListModal from './AddGameToListModal';
 
 interface GameCard extends GameType {
   setCacheGameList: React.Dispatch<React.SetStateAction<GameAndList[]>>;
+  isUserListCard?: boolean;
 }
 
-const Game: React.FC<GameCard> = ({ setCacheGameList, ...game }) => {
+const Game: React.FC<GameCard> = ({ setCacheGameList, isUserListCard, ...game }) => {
   const token = localStorage.getItem('token');
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -36,11 +37,26 @@ const Game: React.FC<GameCard> = ({ setCacheGameList, ...game }) => {
   }, []);
 
   const listInfo = useMemo(() => {
-    if (!token) return undefined;
+    if (!token || isUserListCard) return undefined;
     if (localListInfo) return <div className={styles.listInfo}>{localListInfo}</div>;
     if (game.userList) return <div className={styles.listInfo}>{game.userList}</div>;
     return undefined;
-  }, [game.userList, localListInfo, token]);
+  }, [game.userList, isUserListCard, localListInfo, token]);
+
+  const cardButton = useMemo(() => {
+    const isGameInList = game.userList || localListInfo || isUserListCard;
+    if (isGameInList)
+      return (
+        <Button icon={<RightCircleOutlined />} type="default" onClick={handleModal}>
+          Move to
+        </Button>
+      );
+    return (
+      <Button icon={<PlusCircleFilled />} type="primary" onClick={handleModal}>
+        Add to
+      </Button>
+    );
+  }, [game.userList, handleModal, isUserListCard, localListInfo]);
 
   useEffect(() => {
     if (!localListInfo) return;
@@ -72,9 +88,7 @@ const Game: React.FC<GameCard> = ({ setCacheGameList, ...game }) => {
           <span className={styles.tooltip}>{platformsString}</span>
         </p>
       </div>
-      <Button icon={<PlusCircleFilled />} type="primary" onClick={handleModal}>
-        Add to
-      </Button>
+      {cardButton}
       <AddGameToListModal
         handleModal={handleModal}
         isModalVisible={isModalVisible}

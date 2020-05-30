@@ -1,10 +1,11 @@
-import React, { useMemo, Dispatch, SetStateAction } from 'react';
+import React, { useMemo, Dispatch, SetStateAction, useCallback } from 'react';
 
 import { gql } from 'apollo-boost';
 import { Modal, Button } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { CloseOutlined } from '@ant-design/icons';
 import { useQuery, useMutation } from '@apollo/react-hooks';
+import cx from 'classnames';
 
 import styles from './AddGameToListModal.module.scss';
 
@@ -86,32 +87,38 @@ const AddGameToListModal: React.FC<Props> = ({
     [game]
   );
 
+  const onClick = useCallback(
+    (list) => (): Promise<void> =>
+      addOrMoveGameToList({ variables: { listId: list.id, ...gameToAdd } })
+        .then(({ data: mutationResult, errors }) => {
+          if (errors || !mutationResult || !mutationResult.addOrMoveGameToList) throw errors;
+          setLocalListInfo(list.name);
+          setLocalListId(list.id.toString());
+          handleModal();
+        })
+        .catch((err) => {
+          console.log({ err });
+        }),
+    [addOrMoveGameToList, gameToAdd, handleModal, setLocalListId, setLocalListInfo]
+  );
+
   const ListButtons = useMemo(
     () =>
-      data?.lists.map((list) => (
-        <div
-          className={styles['modal-btn']}
-          role="presentation"
-          key={list.id}
-          onClick={(): Promise<void> =>
-            addOrMoveGameToList({ variables: { listId: list.id, ...gameToAdd } })
-              .then(({ data: mutationResult, errors }) => {
-                if (errors || !mutationResult || !mutationResult.addOrMoveGameToList) throw errors;
-                setLocalListInfo(list.name);
-                console.log({ listId: list.id });
-                setLocalListId(list.id.toString());
-                handleModal();
-              })
-              .catch((err) => {
-                console.log({ err });
-              })
-          }
-        >
-          <img src={LIST_ICONS[list.name] || ''} alt={list.name} />
-          {list.name}
-        </div>
-      )),
-    [addOrMoveGameToList, data, gameToAdd, handleModal, setLocalListId, setLocalListInfo]
+      data?.lists.map((list) => {
+        const isGameOnThisList = game.userListId && Number(game.userListId) === Number(list.id);
+
+        const onClickHandle = !isGameOnThisList ? onClick(list) : undefined;
+        const className = isGameOnThisList
+          ? cx(styles['modal-btn'], styles['modal-btn--disabled'])
+          : styles['modal-btn'];
+        return (
+          <div className={className} role="presentation" key={list.id} onClick={onClickHandle}>
+            <img src={LIST_ICONS[list.name] || ''} alt={list.name} />
+            {list.name}
+          </div>
+        );
+      }),
+    [data, game.userListId, onClick]
   );
 
   const modalContent = useMemo(() => {
@@ -132,10 +139,11 @@ const AddGameToListModal: React.FC<Props> = ({
 
   const modalTitle = useMemo(() => {
     const hasToken = localStorage.getItem('token') || false;
+    const addOrMoveString = game.userListId ? 'move' : 'add';
     return hasToken
-      ? 'Select a list to add this game'
+      ? `Select a list to ${addOrMoveString} this game`
       : 'Create an account to save a game to your list';
-  }, []);
+  }, [game.userListId]);
 
   return (
     <Modal
