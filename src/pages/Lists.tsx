@@ -1,6 +1,5 @@
 import React, { useMemo, useState, useCallback, useEffect } from 'react';
 
-import { gql } from 'apollo-boost';
 import { Layout, Menu } from 'antd';
 import { useQuery } from '@apollo/react-hooks';
 
@@ -8,15 +7,7 @@ import styles from './Lists.module.scss';
 import ListContent from './ListContent';
 import { LIST_ICONS } from '../helpers/common';
 import useWindowSize from '../hooks/useWindowsSize';
-
-const GET_LISTS = gql`
-  {
-    lists {
-      id
-      name
-    }
-  }
-`;
+import { GET_LISTS } from '../helpers/queries';
 
 const { Content, Sider } = Layout;
 

@@ -1,20 +1,12 @@
 import React from 'react';
 
 import { useFormik } from 'formik';
-import { gql } from 'apollo-boost';
 import { useHistory } from 'react-router-dom';
 import { Input, Button, Typography } from 'antd';
 import { useMutation } from '@apollo/react-hooks';
 
 import styles from './Login.module.scss';
-
-const LOGIN = gql`
-  mutation login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      token
-    }
-  }
-`;
+import { LOGIN } from '../helpers/queries';
 
 interface Values {
   email?: string;

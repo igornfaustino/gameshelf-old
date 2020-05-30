@@ -1,6 +1,5 @@
 import React, { useMemo, useState, useCallback } from 'react';
 
-import { gql } from 'apollo-boost';
 import { Button, Tag } from 'antd';
 import { useMutation } from '@apollo/react-hooks';
 import { PlusCircleFilled, RightCircleOutlined, CloseOutlined } from '@ant-design/icons';
@@ -8,18 +7,7 @@ import { PlusCircleFilled, RightCircleOutlined, CloseOutlined } from '@ant-desig
 import { GameType } from '../types/common';
 import styles from './Game.module.scss';
 import AddGameToListModal from './AddGameToListModal';
-
-const REMOVE_GAME = gql`
-  mutation removeGameFromList($gameId: ID!) {
-    removeGameFromList(gameId: $gameId) {
-      id
-      list {
-        id
-        name
-      }
-    }
-  }
-`;
+import { REMOVE_GAME } from '../helpers/queries';
 
 interface RemoveGameMutation {
   removeGameFromList: boolean;

@@ -1,54 +1,14 @@
 import React, { useMemo, useState, useEffect } from 'react';
 
 import { Button } from 'antd';
-import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 
 import useRouteQuery from '../hooks/useQuery';
 import { GameType, GameAndList } from '../types/common';
 import styles from './Search.module.scss';
 import FilterForm from '../components/FilterForm';
-import { joinGamesAndCachedInfo } from '../helpers/common';
 import GamesDisplay from '../components/GamesDisplay';
-
-const SEARCH_GAME = gql`
-  query searchGames(
-    $search: String!
-    $platforms: [Int]
-    $genres: [Int]
-    $limit: Int
-    $offset: Int
-  ) {
-    searchGames(
-      search: $search
-      platforms: $platforms
-      genres: $genres
-      limit: $limit
-      offset: $offset
-    ) {
-      count
-      games {
-        id
-        name
-        coverURL
-        genres {
-          id
-          name
-        }
-        platforms {
-          id
-          name
-          abbreviation
-        }
-        similarGames
-        list {
-          id
-          name
-        }
-      }
-    }
-  }
-`;
+import { SEARCH_GAME } from '../helpers/queries';
 
 interface Query {
   searchGames: {

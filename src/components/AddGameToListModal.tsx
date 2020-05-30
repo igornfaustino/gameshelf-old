@@ -1,6 +1,5 @@
 import React, { useMemo, useCallback } from 'react';
 
-import { gql } from 'apollo-boost';
 import { Modal, Button } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { CloseOutlined } from '@ant-design/icons';
@@ -11,43 +10,7 @@ import styles from './AddGameToListModal.module.scss';
 
 import { GameType } from '../types/common';
 import { LIST_ICONS } from '../helpers/common';
-
-const GET_LISTS = gql`
-  {
-    lists {
-      id
-      name
-    }
-  }
-`;
-
-const ADD_GAME = gql`
-  mutation addOrMoveGameToList(
-    $gameId: ID!
-    $listId: ID!
-    $name: String!
-    $coverURL: String!
-    $genres: [ID]!
-    $platforms: [ID]!
-    $similarGames: [ID]!
-  ) {
-    addOrMoveGameToList(
-      gameId: $gameId
-      listId: $listId
-      name: $name
-      coverURL: $coverURL
-      genres: $genres
-      platforms: $platforms
-      similarGames: $similarGames
-    ) {
-      id
-      list {
-        id
-        name
-      }
-    }
-  }
-`;
+import { GET_LISTS, ADD_GAME } from '../helpers/queries';
 
 interface ListData {
   id: number;

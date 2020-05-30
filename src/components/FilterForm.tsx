@@ -1,30 +1,11 @@
 import React, { useMemo, useCallback } from 'react';
 
-import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import { Select } from 'antd';
 import { Platform, Genres } from '../types/common';
+import { GET_PLATFORMS, GET_GENRES } from '../helpers/queries';
 
 const { Option } = Select;
-
-const GET_PLATFORMS = gql`
-  {
-    platforms {
-      id
-      name
-      abbreviation
-    }
-  }
-`;
-
-const GET_GENRES = gql`
-  {
-    genres {
-      id
-      name
-    }
-  }
-`;
 
 interface PlatformQuery {
   platforms: Platform[];

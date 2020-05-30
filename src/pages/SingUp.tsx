@@ -1,21 +1,12 @@
 import React from 'react';
 
 import { useFormik } from 'formik';
-import { gql } from 'apollo-boost';
 import { useHistory } from 'react-router-dom';
 import { Input, Button, Typography } from 'antd';
-import { GraphQLError } from 'graphql';
 import { useMutation } from '@apollo/react-hooks';
 
 import styles from './SingUp.module.scss';
-
-const SING_UP = gql`
-  mutation singUp($name: String!, $email: String!, $password: String!) {
-    singUp(name: $name, email: $email, password: $password) {
-      token
-    }
-  }
-`;
+import { SING_UP } from '../helpers/queries';
 
 interface Values {
   name?: string;
