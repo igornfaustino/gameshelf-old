@@ -9,6 +9,11 @@ export interface Genres {
   name: string;
 }
 
+export interface List {
+  id?: number;
+  name?: number;
+}
+
 export interface GameType {
   id: string;
   name: string;
@@ -18,8 +23,7 @@ export interface GameType {
   platforms?: Platform[];
   platformsId?: number[];
   similarGames?: number[];
-  userList?: string;
-  userListId?: string;
+  list?: List;
 }
 
 export interface GameAndList {

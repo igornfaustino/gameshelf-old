@@ -2,7 +2,6 @@ import React, { useMemo, useState, useEffect } from 'react';
 
 import { Button } from 'antd';
 import { gql } from 'apollo-boost';
-import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/react-hooks';
 
 import useRouteQuery from '../hooks/useQuery';
@@ -42,7 +41,10 @@ const SEARCH_GAME = gql`
           abbreviation
         }
         similarGames
-        userList
+        list {
+          id
+          name
+        }
       }
     }
   }
@@ -62,8 +64,6 @@ interface StateType {
 const LIMIT = 30;
 
 const Search: React.FC = () => {
-  const cacheGameList = useSelector<StateType>((state) => state.gameAndList) as GameAndList[];
-
   const [offset, setOffset] = useState(0);
   const [platforms, setPlatforms] = useState<undefined | number[]>(undefined);
   const [genres, setGenres] = useState<undefined | number[]>(undefined);
@@ -135,8 +135,8 @@ const Search: React.FC = () => {
   useEffect(() => {
     const searchedGames = data?.searchGames.games;
     if (!searchedGames) return setGames([]);
-    return setGames(joinGamesAndCachedInfo(searchedGames, cacheGameList));
-  }, [cacheGameList, data]);
+    return setGames(searchedGames);
+  }, [data]);
 
   useEffect(() => {
     refetch();

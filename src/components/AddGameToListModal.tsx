@@ -2,7 +2,6 @@ import React, { useMemo, useCallback } from 'react';
 
 import { gql } from 'apollo-boost';
 import { Modal, Button } from 'antd';
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { CloseOutlined } from '@ant-design/icons';
 import { useQuery, useMutation } from '@apollo/react-hooks';
@@ -40,7 +39,13 @@ const ADD_GAME = gql`
       genres: $genres
       platforms: $platforms
       similarGames: $similarGames
-    )
+    ) {
+      id
+      list {
+        id
+        name
+      }
+    }
   }
 `;
 
@@ -65,7 +70,6 @@ interface Props {
 
 const AddGameToListModal: React.FC<Props> = ({ isModalVisible, handleModal, game }) => {
   const history = useHistory();
-  const dispatch = useDispatch();
   const { data } = useQuery<ListQuery>(GET_LISTS);
   const [addOrMoveGameToList] = useMutation<AddGameMutation>(ADD_GAME);
 
@@ -82,30 +86,17 @@ const AddGameToListModal: React.FC<Props> = ({ isModalVisible, handleModal, game
   );
 
   const onClick = useCallback(
-    (list) => (): Promise<void> =>
-      addOrMoveGameToList({ variables: { listId: list.id, ...gameToAdd } })
-        .then(({ data: mutationResult, errors }) => {
-          if (errors || !mutationResult || !mutationResult.addOrMoveGameToList) throw errors;
-          dispatch({
-            type: 'ADD_OR_UPDATE_GAME_LIST',
-            gameList: {
-              gameId: gameToAdd.gameId,
-              userList: list.name,
-              listId: list.id,
-            },
-          });
-          handleModal();
-        })
-        .catch((err) => {
-          console.log({ err });
-        }),
-    [addOrMoveGameToList, dispatch, gameToAdd, handleModal]
+    (list) => async (): Promise<void> => {
+      await addOrMoveGameToList({ variables: { listId: list.id, ...gameToAdd } });
+      handleModal();
+    },
+    [addOrMoveGameToList, gameToAdd, handleModal]
   );
 
   const ListButtons = useMemo(
     () =>
       data?.lists.map((list) => {
-        const isGameOnThisList = game.userListId && Number(game.userListId) === Number(list.id);
+        const isGameOnThisList = game.list && Number(game.list.id) === Number(list.id);
 
         const onClickHandle = !isGameOnThisList ? onClick(list) : undefined;
         const className = isGameOnThisList
@@ -118,7 +109,7 @@ const AddGameToListModal: React.FC<Props> = ({ isModalVisible, handleModal, game
           </div>
         );
       }),
-    [data, game.userListId, onClick]
+    [data, game.list, onClick]
   );
 
   const modalContent = useMemo(() => {
@@ -139,11 +130,11 @@ const AddGameToListModal: React.FC<Props> = ({ isModalVisible, handleModal, game
 
   const modalTitle = useMemo(() => {
     const hasToken = localStorage.getItem('token') || false;
-    const addOrMoveString = game.userListId ? 'move' : 'add';
+    const addOrMoveString = game.list?.id ? 'move' : 'add';
     return hasToken
       ? `Select a list to ${addOrMoveString} this game`
       : 'Create an account to save a game to your list';
-  }, [game.userListId]);
+  }, [game.list]);
 
   return (
     <Modal
