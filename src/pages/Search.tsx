@@ -2,10 +2,10 @@ import React, { useMemo, useState, useEffect } from 'react';
 
 import { Button } from 'antd';
 import { gql } from 'apollo-boost';
+import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/react-hooks';
 
 import useRouteQuery from '../hooks/useQuery';
-import Game from '../components/Game';
 import { GameType, GameAndList } from '../types/common';
 import styles from './Search.module.scss';
 import FilterForm from '../components/FilterForm';
@@ -55,13 +55,18 @@ interface Query {
   };
 }
 
+interface StateType {
+  gameAndList: GameAndList[];
+}
+
 const LIMIT = 30;
 
 const Search: React.FC = () => {
+  const cacheGameList = useSelector<StateType>((state) => state.gameAndList) as GameAndList[];
+
   const [offset, setOffset] = useState(0);
   const [platforms, setPlatforms] = useState<undefined | number[]>(undefined);
   const [genres, setGenres] = useState<undefined | number[]>(undefined);
-  const [cacheGameList, setCacheGameList] = useState<GameAndList[]>([]);
   const [games, setGames] = useState<GameType[]>([]);
 
   const query = useRouteQuery();
@@ -116,7 +121,7 @@ const Search: React.FC = () => {
         <div>Loading</div>
       ) : (
         <>
-          <GamesDisplay games={games} setCacheGameList={setCacheGameList} />
+          <GamesDisplay games={games} />
           <div className={styles.pages}>{pagination}</div>
         </>
       ),

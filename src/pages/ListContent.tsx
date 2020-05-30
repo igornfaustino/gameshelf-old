@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { gql } from 'apollo-boost';
+import { useSelector } from 'react-redux';
 import { useQuery } from '@apollo/react-hooks';
 
 import { GameType, GameAndList } from '../types/common';
@@ -36,9 +37,13 @@ const GET_GAMES_FROM_LIST = gql`
   }
 `;
 
+interface StateType {
+  gameAndList: GameAndList[];
+}
+
 const ListContent: React.FC<ListContentType> = ({ listId }) => {
+  const cacheGameList = useSelector<StateType>((state) => state.gameAndList) as GameAndList[];
   const [games, setGames] = useState<GameType[]>([]);
-  const [cacheGameList, setCacheGameList] = useState<GameAndList[]>([]);
 
   const { loading, error, data } = useQuery<Query>(GET_GAMES_FROM_LIST, {
     variables: {
@@ -51,13 +56,12 @@ const ListContent: React.FC<ListContentType> = ({ listId }) => {
   useEffect(() => {
     const gamesOnList = data?.getGamesFromList;
     if (!gamesOnList) return setGames([]);
-    console.log(listId);
     return setGames(filterGamesThatAreNoLongOnTheList(gamesOnList, cacheGameList, listId));
   }, [cacheGameList, data, listId]);
 
   return (
     <>
-      <GamesDisplay games={games} setCacheGameList={setCacheGameList} isGamesOnList={true} />
+      <GamesDisplay games={games} isGamesOnList />
     </>
   );
 };

@@ -1,7 +1,8 @@
-import React, { useMemo, Dispatch, SetStateAction, useCallback } from 'react';
+import React, { useMemo, useCallback } from 'react';
 
 import { gql } from 'apollo-boost';
 import { Modal, Button } from 'antd';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { CloseOutlined } from '@ant-design/icons';
 import { useQuery, useMutation } from '@apollo/react-hooks';
@@ -60,18 +61,11 @@ interface Props {
   isModalVisible: boolean;
   handleModal: () => void;
   game: GameType;
-  setLocalListInfo: Dispatch<SetStateAction<string>>;
-  setLocalListId: Dispatch<SetStateAction<string>>;
 }
 
-const AddGameToListModal: React.FC<Props> = ({
-  isModalVisible,
-  handleModal,
-  game,
-  setLocalListInfo,
-  setLocalListId,
-}) => {
+const AddGameToListModal: React.FC<Props> = ({ isModalVisible, handleModal, game }) => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const { data } = useQuery<ListQuery>(GET_LISTS);
   const [addOrMoveGameToList] = useMutation<AddGameMutation>(ADD_GAME);
 
@@ -92,14 +86,20 @@ const AddGameToListModal: React.FC<Props> = ({
       addOrMoveGameToList({ variables: { listId: list.id, ...gameToAdd } })
         .then(({ data: mutationResult, errors }) => {
           if (errors || !mutationResult || !mutationResult.addOrMoveGameToList) throw errors;
-          setLocalListInfo(list.name);
-          setLocalListId(list.id.toString());
+          dispatch({
+            type: 'ADD_OR_UPDATE_GAME_LIST',
+            gameList: {
+              gameId: gameToAdd.gameId,
+              userList: list.name,
+              listId: list.id,
+            },
+          });
           handleModal();
         })
         .catch((err) => {
           console.log({ err });
         }),
-    [addOrMoveGameToList, gameToAdd, handleModal, setLocalListId, setLocalListInfo]
+    [addOrMoveGameToList, dispatch, gameToAdd, handleModal]
   );
 
   const ListButtons = useMemo(

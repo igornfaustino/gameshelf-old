@@ -1,23 +1,60 @@
-import React, { useMemo, useState, useCallback, useEffect } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 
+import { gql } from 'apollo-boost';
 import { Button, Tag } from 'antd';
-import { PlusCircleFilled, RightCircleOutlined } from '@ant-design/icons';
+import { useDispatch } from 'react-redux';
+import { useMutation } from '@apollo/react-hooks';
+import { PlusCircleFilled, RightCircleOutlined, CloseOutlined } from '@ant-design/icons';
 
-import { GameType, GameAndList } from '../types/common';
+import { GameType } from '../types/common';
 import styles from './Game.module.scss';
 import AddGameToListModal from './AddGameToListModal';
 
+const REMOVE_GAME = gql`
+  mutation removeGameFromList($gameId: ID!) {
+    removeGameFromList(gameId: $gameId)
+  }
+`;
+
+interface RemoveGameMutation {
+  removeGameFromList: boolean;
+}
+
 interface GameCard extends GameType {
-  setCacheGameList: React.Dispatch<React.SetStateAction<GameAndList[]>>;
   isUserListCard?: boolean;
 }
 
-const Game: React.FC<GameCard> = ({ setCacheGameList, isUserListCard, ...game }) => {
+const Game: React.FC<GameCard> = ({ isUserListCard, ...game }) => {
   const token = localStorage.getItem('token');
 
+  const dispatch = useDispatch();
+
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [localListInfo, setLocalListInfo] = useState('');
-  const [localListId, setLocalListId] = useState('');
+
+  const [removeGameFromList] = useMutation<RemoveGameMutation>(REMOVE_GAME);
+
+  const handleModal = useCallback(() => {
+    setIsModalVisible((prev) => !prev);
+  }, []);
+
+  const handleRemoveGame = useCallback(() => {
+    if (!token) return;
+    removeGameFromList({ variables: { gameId: game.id } })
+      .then(({ data: mutationResult, errors }) => {
+        if (errors || !mutationResult || !mutationResult.removeGameFromList) throw errors;
+        dispatch({
+          type: 'ADD_OR_UPDATE_GAME_LIST',
+          gameList: {
+            gameId: game.id,
+            userList: undefined,
+            listId: undefined,
+          },
+        });
+      })
+      .catch((err) => {
+        console.log({ err });
+      });
+  }, [dispatch, game.id, removeGameFromList, token]);
 
   const platformsString = useMemo(
     () => game.platforms?.map((platform) => platform.name).join(', '),
@@ -32,19 +69,22 @@ const Game: React.FC<GameCard> = ({ setCacheGameList, isUserListCard, ...game })
     [game.platforms]
   );
 
-  const handleModal = useCallback(() => {
-    setIsModalVisible((prev) => !prev);
-  }, []);
-
   const listInfo = useMemo(() => {
-    if (!token || isUserListCard) return undefined;
-    if (localListInfo) return <div className={styles.listInfo}>{localListInfo}</div>;
-    if (game.userList) return <div className={styles.listInfo}>{game.userList}</div>;
+    if (!token) return undefined;
+    const removeBtn = <CloseOutlined onClick={handleRemoveGame} />;
+    if (isUserListCard) return <div className={styles.listInfo}>{removeBtn}</div>;
+    if (game.userList)
+      return (
+        <div className={styles.listInfo}>
+          {removeBtn}
+          <span>{game.userList}</span>
+        </div>
+      );
     return undefined;
-  }, [game.userList, isUserListCard, localListInfo, token]);
+  }, [game.userList, handleRemoveGame, isUserListCard, token]);
 
   const cardButton = useMemo(() => {
-    const isGameInList = game.userList || localListInfo || isUserListCard;
+    const isGameInList = game.userList || isUserListCard;
     if (isGameInList)
       return (
         <Button icon={<RightCircleOutlined />} type="default" onClick={handleModal}>
@@ -56,24 +96,7 @@ const Game: React.FC<GameCard> = ({ setCacheGameList, isUserListCard, ...game })
         Add to
       </Button>
     );
-  }, [game.userList, handleModal, isUserListCard, localListInfo]);
-
-  useEffect(() => {
-    if (!localListInfo) return;
-
-    setCacheGameList((prev) => {
-      const newEntry = {
-        gameId: Number(game.id),
-        userList: localListInfo,
-        listId: localListId,
-      };
-
-      const otherCachedValues = prev.filter(
-        (gameAndList) => gameAndList.gameId !== Number(game.id)
-      );
-      return [...otherCachedValues, newEntry];
-    });
-  }, [game.id, localListId, localListInfo, setCacheGameList]);
+  }, [game.userList, handleModal, isUserListCard]);
 
   return (
     <div className={styles['game-card']}>
@@ -89,13 +112,7 @@ const Game: React.FC<GameCard> = ({ setCacheGameList, isUserListCard, ...game })
         </p>
       </div>
       {cardButton}
-      <AddGameToListModal
-        handleModal={handleModal}
-        isModalVisible={isModalVisible}
-        game={game}
-        setLocalListInfo={setLocalListInfo}
-        setLocalListId={setLocalListId}
-      />
+      <AddGameToListModal handleModal={handleModal} isModalVisible={isModalVisible} game={game} />
     </div>
   );
 };
