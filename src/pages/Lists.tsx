@@ -4,7 +4,7 @@ import { gql } from 'apollo-boost';
 import { Layout, Menu } from 'antd';
 import { useQuery } from '@apollo/react-hooks';
 
-import style from './Lists.module.scss';
+import styles from './Lists.module.scss';
 import ListContent from './ListContent';
 import { LIST_ICONS } from '../helpers/common';
 import useWindowSize from '../hooks/useWindowsSize';
@@ -50,14 +50,16 @@ const Lists: React.FC = () => {
               src={LIST_ICONS[list.name] || ''}
               alt={list.name}
               width={30}
-              className={style.icon}
+              className={styles.icon}
             />
-            <span className={style.menuText}>{list.name}</span>
+            <span className={styles.menuText}>{list.name}</span>
           </Menu.Item>
         );
       }),
     [data]
   );
+
+  const siderStyle = useMemo(() => ({ width: siderWidth }), [siderWidth]);
 
   useEffect(() => {
     const firstListItem = data?.lists[0];
@@ -66,31 +68,26 @@ const Lists: React.FC = () => {
   }, [data]);
 
   useEffect(() => {
-    console.log(selectedListId);
-  }, [selectedListId]);
-
-  useEffect(() => {
     const width = windowSize[0];
-    if (width <= 600) return setSiderWidth(80);
+    if (width <= 730) return setSiderWidth(80);
     setSiderWidth(200);
   }, [windowSize]);
 
   return (
-    <Layout className={style.content}>
-      <Sider width={siderWidth} className={style.sider}>
-        <div style={{ position: 'fixed', width: siderWidth }}>
+    <Layout className={styles.content}>
+      <Sider width={siderWidth} className={styles.sider}>
+        <div style={siderStyle} className={styles.menuWrapper}>
           <Menu
             mode="inline"
             defaultSelectedKeys={[defaultListId]}
             onClick={handleClick}
             defaultOpenKeys={['sub1']}
-            style={{ height: '100%' }}
           >
             {menus}
           </Menu>
         </div>
       </Sider>
-      <Content style={{ padding: '0 24px' }}>
+      <Content className={styles.mainContent}>
         <ListContent listId={selectedListId} />
       </Content>
     </Layout>

@@ -51,11 +51,16 @@
   }
 }
 
+.mainContent {
+  padding: 0px 24px 16px;
+}
+
 .games {
   display: grid;
   grid-template-columns: auto auto auto auto auto;
   /* grid-column-gap: 16px; */
   grid-gap: 16px;
+  padding-bottom: 16px;
 }
 
 .pages {
@@ -79,7 +84,11 @@
 .menuText {
   font-weight: bold;
 
-  @media (max-width: 600px) {
+  @media (max-width: 730px) {
     display: none;
   }
+}
+
+.menuWrapper {
+  position: fixed;
 }
