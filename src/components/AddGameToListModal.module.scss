@@ -22,10 +22,20 @@
 
   img {
     height: 80px;
+
+    @media (max-width: 600px) {
+      height: 60px;
+    }
+
+    @media (max-width: 400px) {
+      height: 30px;
+    }
   }
 
-  span {
-    margin-left: 0 !important;
+  .btnText {
+    @media (max-width: 400px) {
+      display: none;
+    }
   }
 
   &:hover {

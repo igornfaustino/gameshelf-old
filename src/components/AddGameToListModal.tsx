@@ -114,7 +114,7 @@ const AddGameToListModal: React.FC<Props> = ({
         return (
           <div className={className} role="presentation" key={list.id} onClick={onClickHandle}>
             <img src={LIST_ICONS[list.name] || ''} alt={list.name} />
-            {list.name}
+            <span className={styles.btnText}>{list.name}</span>
           </div>
         );
       }),
