@@ -10,7 +10,7 @@ import AddGameToListModal from './AddGameToListModal';
 import { REMOVE_GAME } from '../helpers/queries';
 
 interface RemoveGameMutation {
-  removeGameFromList: boolean;
+  removeGameFromList: GameType;
 }
 
 interface GameCard extends GameType {

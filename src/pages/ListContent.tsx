@@ -26,12 +26,13 @@ const ListContent: React.FC<ListContentType> = ({ listId }) => {
       listId,
     },
     skip: !listId,
+    fetchPolicy: 'network-only',
   });
 
   useEffect(() => {
     const gamesOnList = data?.getGamesFromList;
     if (!gamesOnList) return setGames([]);
-    return setGames(gamesOnList);
+    return setGames(gamesOnList.filter((game) => Number(game.list?.id) === Number(listId)));
   }, [data, listId]);
 
   return (
