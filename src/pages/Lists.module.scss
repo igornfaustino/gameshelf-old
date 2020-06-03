@@ -84,6 +84,13 @@
 .menuText {
   font-weight: bold;
 
+  span {
+    &:last-child {
+      position: absolute;
+      right: 8%;
+    }
+  }
+
   @media (max-width: 730px) {
     display: none;
   }

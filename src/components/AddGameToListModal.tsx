@@ -13,8 +13,10 @@ import { LIST_ICONS } from '../helpers/common';
 import { GET_LISTS, ADD_GAME } from '../helpers/queries';
 
 interface ListData {
-  id: number;
-  name: string;
+  list: {
+    id: number;
+    name: string;
+  };
 }
 
 interface ListQuery {
@@ -34,7 +36,9 @@ interface Props {
 const AddGameToListModal: React.FC<Props> = ({ isModalVisible, handleModal, game }) => {
   const history = useHistory();
   const { data } = useQuery<ListQuery>(GET_LISTS);
-  const [addOrMoveGameToList] = useMutation<AddGameMutation>(ADD_GAME);
+  const [addOrMoveGameToList] = useMutation<AddGameMutation>(ADD_GAME, {
+    refetchQueries: [{ query: GET_LISTS }],
+  });
 
   const gameToAdd = useMemo(
     () => ({
@@ -43,22 +47,26 @@ const AddGameToListModal: React.FC<Props> = ({ isModalVisible, handleModal, game
       platforms: game.platforms ? game.platforms.map((platform) => platform.id) : [],
       genres: game.genres ? game.genres.map((genre) => genre.id) : [],
       coverURL: game.coverURL,
-      similarGames: game.similarGames,
+      similarGames: game.similarGames || [],
     }),
     [game]
   );
 
   const onClick = useCallback(
     (list) => async (): Promise<void> => {
-      await addOrMoveGameToList({ variables: { listId: list.id, ...gameToAdd } });
-      handleModal();
+      try {
+        await addOrMoveGameToList({ variables: { listId: list.id, ...gameToAdd } });
+        handleModal();
+      } catch (error) {
+        // console.log({ error, gameToAdd });
+      }
     },
     [addOrMoveGameToList, gameToAdd, handleModal]
   );
 
   const ListButtons = useMemo(
     () =>
-      data?.lists.map((list) => {
+      data?.lists.map(({ list }) => {
         const isGameOnThisList = game.list && Number(game.list.id) === Number(list.id);
 
         const onClickHandle = !isGameOnThisList ? onClick(list) : undefined;

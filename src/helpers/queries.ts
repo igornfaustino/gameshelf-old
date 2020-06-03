@@ -15,8 +15,11 @@ export const REMOVE_GAME = gql`
 export const GET_LISTS = gql`
   {
     lists {
-      id
-      name
+      count
+      list {
+        id
+        name
+      }
     }
   }
 `;

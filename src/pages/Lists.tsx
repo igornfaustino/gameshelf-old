@@ -12,8 +12,11 @@ import { GET_LISTS } from '../helpers/queries';
 const { Content, Sider } = Layout;
 
 interface ListData {
-  id: number;
-  name: string;
+  count: number;
+  list: {
+    id: number;
+    name: string;
+  };
 }
 
 interface ListQuery {
@@ -34,7 +37,7 @@ const Lists: React.FC = () => {
 
   const menus = useMemo(
     () =>
-      data?.lists.map((list) => {
+      data?.lists.map(({ list, count }) => {
         return (
           <Menu.Item key={list.id}>
             <img
@@ -43,7 +46,10 @@ const Lists: React.FC = () => {
               width={30}
               className={styles.icon}
             />
-            <span className={styles.menuText}>{list.name}</span>
+            <span className={styles.menuText}>
+              <span>{list.name}</span>
+              <span>{count}</span>
+            </span>
           </Menu.Item>
         );
       }),
@@ -53,7 +59,7 @@ const Lists: React.FC = () => {
   const siderStyle = useMemo(() => ({ width: siderWidth }), [siderWidth]);
 
   useEffect(() => {
-    const firstListItem = data?.lists[0];
+    const firstListItem = data?.lists[0].list;
     if (!firstListItem) return;
     setDefaultListId(firstListItem.id.toString());
   }, [data]);

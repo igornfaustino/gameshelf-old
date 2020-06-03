@@ -7,7 +7,7 @@ import { PlusCircleFilled, RightCircleOutlined, CloseOutlined } from '@ant-desig
 import { GameType } from '../types/common';
 import styles from './Game.module.scss';
 import AddGameToListModal from './AddGameToListModal';
-import { REMOVE_GAME } from '../helpers/queries';
+import { REMOVE_GAME, GET_LISTS } from '../helpers/queries';
 
 interface RemoveGameMutation {
   removeGameFromList: GameType;
@@ -22,7 +22,9 @@ const Game: React.FC<GameCard> = ({ isUserListCard, ...game }) => {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const [removeGameFromList] = useMutation<RemoveGameMutation>(REMOVE_GAME);
+  const [removeGameFromList] = useMutation<RemoveGameMutation>(REMOVE_GAME, {
+    refetchQueries: [{ query: GET_LISTS }],
+  });
 
   const handleModal = useCallback(() => {
     setIsModalVisible((prev) => !prev);

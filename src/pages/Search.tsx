@@ -4,7 +4,7 @@ import { Button } from 'antd';
 import { useQuery } from '@apollo/react-hooks';
 
 import useRouteQuery from '../hooks/useQuery';
-import { GameType, GameAndList } from '../types/common';
+import { GameType } from '../types/common';
 import styles from './Search.module.scss';
 import FilterForm from '../components/FilterForm';
 import GamesDisplay from '../components/GamesDisplay';
@@ -15,10 +15,6 @@ interface Query {
     games: GameType[];
     count: number;
   };
-}
-
-interface StateType {
-  gameAndList: GameAndList[];
 }
 
 const LIMIT = 30;
