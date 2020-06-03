@@ -67,7 +67,7 @@ const Lists: React.FC = () => {
   useEffect(() => {
     const width = windowSize[0];
     if (width <= 730) return setSiderWidth(80);
-    setSiderWidth(200);
+    return setSiderWidth(200);
   }, [windowSize]);
 
   return (
