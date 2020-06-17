@@ -1,0 +1,21 @@
+.content-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-right: 16px;
+
+  @media (max-width: 670px) {
+    justify-content: center;
+  }
+}
+
+.pages {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+  margin-right: 16px;
+  button {
+    margin: 2px;
+  }
+}

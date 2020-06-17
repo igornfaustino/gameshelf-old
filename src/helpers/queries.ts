@@ -108,24 +108,39 @@ export const SEARCH_GAME = gql`
 `;
 
 export const GET_GAMES_FROM_LIST = gql`
-  query getGamesFromList($listId: ID) {
-    getGamesFromList(listId: $listId) {
-      id
-      name
-      coverURL
-      genres {
+  query getGamesFromList(
+    $listId: ID
+    $platforms: [Int]
+    $genres: [Int]
+    $limit: Int
+    $offset: Int
+  ) {
+    getGamesFromList(
+      listId: $listId
+      platforms: $platforms
+      genres: $genres
+      limit: $limit
+      offset: $offset
+    ) {
+      count
+      games {
         id
         name
-      }
-      platforms {
-        id
-        name
-        abbreviation
-      }
-      similarGames
-      list {
-        id
-        name
+        coverURL
+        genres {
+          id
+          name
+        }
+        platforms {
+          id
+          name
+          abbreviation
+        }
+        similarGames
+        list {
+          id
+          name
+        }
       }
     }
   }
