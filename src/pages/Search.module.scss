@@ -1,9 +1,17 @@
 .content {
   background: #fff;
-  padding: 24px;
+  padding: 16px;
   min-height: 70vh;
-  margin-top: 16px;
+  margin-top: 80px;
+  margin-left: 100px;
+  margin-right: 100px;
   height: 100%;
+
+  @media (max-width: 1143px) {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 64px;
+  }
 
   .content-header {
     display: flex;
@@ -45,6 +53,7 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 16px;
+  // margin-right: 35px;
   button {
     margin: 2px;
   }

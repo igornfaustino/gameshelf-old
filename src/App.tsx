@@ -15,9 +15,9 @@ const App: React.FC = () => {
     <Router>
       <Layout style={{ width: '100%' }}>
         <Header />
-        <Content className={styles.content}>
-          <Routes />
-        </Content>
+        {/* <Content className={styles.content}> */}
+        <Routes />
+        {/* </Content> */}
         <Footer style={{ textAlign: 'center' }}>
           GameShelf ©2020 Created by Igor Neves Faustino{' '}
           <div>

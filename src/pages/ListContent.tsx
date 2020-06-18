@@ -69,6 +69,7 @@ const ListContent: React.FC<ListContentType> = ({ listId }) => {
 
   useEffect(() => {
     setOffset(0);
+    window.scrollTo(0, 0);
   }, [platforms, genres, listId]);
 
   useEffect(() => {
