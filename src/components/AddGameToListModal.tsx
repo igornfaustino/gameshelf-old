@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { useMemo, useCallback, useState } from 'react';
 
 import { Modal, Button } from 'antd';
 import { useHistory } from 'react-router-dom';
@@ -11,6 +11,7 @@ import styles from './AddGameToListModal.module.scss';
 import { GameType } from '../types/common';
 import { LIST_ICONS } from '../helpers/common';
 import { GET_LISTS, ADD_GAME } from '../helpers/queries';
+import Loading from './Loading';
 
 interface ListData {
   list: {
@@ -40,6 +41,8 @@ const AddGameToListModal: React.FC<Props> = ({ isModalVisible, handleModal, game
     refetchQueries: [{ query: GET_LISTS }],
   });
 
+  const [loading, setLoading] = useState(false);
+
   const gameToAdd = useMemo(
     () => ({
       gameId: game.id,
@@ -52,13 +55,18 @@ const AddGameToListModal: React.FC<Props> = ({ isModalVisible, handleModal, game
     [game]
   );
 
+  const onCancel = useCallback(() => (!loading ? handleModal : undefined), [handleModal, loading]);
+
   const onClick = useCallback(
     (list) => async (): Promise<void> => {
       try {
+        setLoading(true);
         await addOrMoveGameToList({ variables: { listId: list.id, ...gameToAdd } });
         handleModal();
       } catch (error) {
-        // console.log({ error, gameToAdd });
+        console.log({ error, gameToAdd });
+      } finally {
+        setLoading(false);
       }
     },
     [addOrMoveGameToList, gameToAdd, handleModal]
@@ -85,19 +93,26 @@ const AddGameToListModal: React.FC<Props> = ({ isModalVisible, handleModal, game
 
   const modalContent = useMemo(() => {
     const hasToken = localStorage.getItem('token') || false;
-    const lists = <div className={styles.modal}>{ListButtons}</div>;
-    const login = (
-      <>
-        <Button block className={styles.margin} onClick={(): void => history.push('login')}>
-          Login
-        </Button>
-        <Button block type="primary" onClick={(): void => history.push('singup')}>
-          Sing Up
-        </Button>
-      </>
+    if (!hasToken)
+      return (
+        <>
+          <Button block className={styles.margin} onClick={(): void => history.push('login')}>
+            Login
+          </Button>
+          <Button block type="primary" onClick={(): void => history.push('singup')}>
+            Sing Up
+          </Button>
+        </>
+      );
+    const lists = loading ? (
+      <div className={styles.center}>
+        <Loading />
+      </div>
+    ) : (
+      <div className={styles.modal}>{ListButtons}</div>
     );
-    return hasToken ? lists : login;
-  }, [ListButtons, history]);
+    return lists;
+  }, [ListButtons, history, loading]);
 
   const modalTitle = useMemo(() => {
     const hasToken = localStorage.getItem('token') || false;
@@ -114,7 +129,7 @@ const AddGameToListModal: React.FC<Props> = ({ isModalVisible, handleModal, game
       visible={isModalVisible}
       footer={null}
       closeIcon={<CloseOutlined />}
-      onCancel={handleModal}
+      onCancel={onCancel}
     >
       {modalContent}
     </Modal>

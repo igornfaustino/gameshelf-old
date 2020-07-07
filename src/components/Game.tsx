@@ -8,6 +8,7 @@ import { GameType } from '../types/common';
 import styles from './Game.module.scss';
 import AddGameToListModal from './AddGameToListModal';
 import { REMOVE_GAME, GET_LISTS } from '../helpers/queries';
+import Loading from './Loading';
 
 interface RemoveGameMutation {
   removeGameFromList: GameType;
@@ -21,6 +22,7 @@ const Game: React.FC<GameCard> = ({ isUserListCard, ...game }) => {
   const token = localStorage.getItem('token');
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [removeGameFromList] = useMutation<RemoveGameMutation>(REMOVE_GAME, {
     refetchQueries: [{ query: GET_LISTS }],
@@ -30,9 +32,16 @@ const Game: React.FC<GameCard> = ({ isUserListCard, ...game }) => {
     setIsModalVisible((prev) => !prev);
   }, []);
 
-  const handleRemoveGame = useCallback(() => {
+  const handleRemoveGame = useCallback(async () => {
     if (!token) return;
-    removeGameFromList({ variables: { gameId: game.id } });
+    try {
+      setLoading(true);
+      await removeGameFromList({ variables: { gameId: game.id } });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   }, [game.id, removeGameFromList, token]);
 
   const platformsString = useMemo(
@@ -53,13 +62,16 @@ const Game: React.FC<GameCard> = ({ isUserListCard, ...game }) => {
     const removeBtn = <CloseOutlined onClick={handleRemoveGame} />;
     if (isUserListCard) return <div className={styles.listInfo}>{removeBtn}</div>;
     if (!game.list?.name) return undefined;
-    return (
-      <div className={styles.listInfo}>
+    const infoContent = loading ? (
+      <Loading fontSize={24} />
+    ) : (
+      <>
         {removeBtn}
         <span>{game.list?.name}</span>
-      </div>
+      </>
     );
-  }, [game.list, handleRemoveGame, isUserListCard, token]);
+    return <div className={styles.listInfo}>{infoContent}</div>;
+  }, [game.list, handleRemoveGame, isUserListCard, loading, token]);
 
   const cardButton = useMemo(() => {
     const isGameInList = game.list?.name || isUserListCard;
