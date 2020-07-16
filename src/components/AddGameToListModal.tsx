@@ -55,7 +55,10 @@ const AddGameToListModal: React.FC<Props> = ({ isModalVisible, handleModal, game
     [game]
   );
 
-  const onCancel = useCallback(() => (!loading ? handleModal : undefined), [handleModal, loading]);
+  const onCancel = useCallback(() => (!loading ? handleModal() : undefined), [
+    handleModal,
+    loading,
+  ]);
 
   const onClick = useCallback(
     (list) => async (): Promise<void> => {

@@ -8,6 +8,7 @@ import GamesDisplay from '../components/GamesDisplay';
 import { GET_GAMES_FROM_LIST } from '../helpers/queries';
 import FilterForm from '../components/FilterForm';
 import styles from './ListContent.module.scss';
+import Loading from '../components/Loading';
 
 interface ListContentType {
   listId: string;
@@ -67,6 +68,21 @@ const ListContent: React.FC<ListContentType> = ({ listId }) => {
     return pageButtons;
   }, [data, offset]);
 
+  const gamesResult = useMemo(
+    () =>
+      loading ? (
+        <div className={styles.center}>
+          <Loading fontSize={56} />
+        </div>
+      ) : (
+        <>
+          <GamesDisplay games={games} isGamesOnList />
+          <div className={styles.pages}>{pagination}</div>
+        </>
+      ),
+    [games, loading, pagination]
+  );
+
   useEffect(() => {
     setOffset(0);
     window.scrollTo(0, 0);
@@ -83,8 +99,7 @@ const ListContent: React.FC<ListContentType> = ({ listId }) => {
       <div className={styles['content-header']}>
         <FilterForm setPlatforms={setPlatforms} setGenres={setGenres} />
       </div>
-      <GamesDisplay games={games} isGamesOnList />
-      <div className={styles.pages}>{pagination}</div>
+      {gamesResult}
     </>
   );
 };

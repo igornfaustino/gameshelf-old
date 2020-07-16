@@ -9,6 +9,7 @@ import styles from './Search.module.scss';
 import FilterForm from '../components/FilterForm';
 import GamesDisplay from '../components/GamesDisplay';
 import { SEARCH_GAME } from '../helpers/queries';
+import Loading from '../components/Loading';
 
 interface Query {
   searchGames: {
@@ -74,7 +75,9 @@ const Search: React.FC = () => {
   const searchResult = useMemo(
     () =>
       loading ? (
-        <div>Loading</div>
+        <div className={styles.center}>
+          <Loading fontSize={56} />
+        </div>
       ) : (
         <>
           <GamesDisplay games={games} />
