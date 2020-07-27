@@ -6,6 +6,12 @@
   position: fixed;
   z-index: 1;
   width: 100%;
+  transition: all 0.5s;
+}
+
+.site-page-header--open {
+  height: auto !important;
+  flex-direction: column;
 }
 
 .header-title {
@@ -46,5 +52,31 @@
         color: #fff;
       }
     }
+  }
+
+  &--collapsed {
+    flex-direction: column;
+
+    div {
+      margin: 4px;
+    }
+
+    button {
+      width: 100%;
+    }
+  }
+}
+
+.open-menu-btn {
+  color: #fff;
+  position: absolute;
+  right: 20px;
+
+  &--collapsed {
+    top: 20px;
+  }
+
+  &:hover {
+    transform: scale(1.1);
   }
 }
