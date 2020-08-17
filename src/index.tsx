@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ApolloClient from 'apollo-boost';
+import ApolloClient, { Operation } from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 import './index.css';
 import App from './App';
@@ -9,7 +9,7 @@ import * as serviceWorker from './serviceWorker';
 const client = new ApolloClient({
   // uri: 'https://gameshelf-backend.herokuapp.com/graphql',
   uri: 'http://localhost:4000/graphql',
-  request: (operation) => {
+  request: (operation): void => {
     const token = localStorage.getItem('token');
     operation.setContext({
       headers: {

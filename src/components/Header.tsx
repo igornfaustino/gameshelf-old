@@ -3,13 +3,12 @@ import React, { useMemo, useCallback, useState, useEffect } from 'react';
 import cx from 'classnames';
 import { useHistory } from 'react-router-dom';
 import { MenuOutlined } from '@ant-design/icons';
-import { Layout, Input, Typography, Button } from 'antd';
+import { Layout, Input, Button } from 'antd';
 
 import styles from './Header.module.scss';
 import useWindowSize from '../hooks/useWindowsSize';
 
 const { Search } = Input;
-const { Text } = Typography;
 const { Header: HeaderAntd } = Layout;
 
 const BREAKPOINT = 800;
@@ -121,7 +120,7 @@ const Header: React.FC = () => {
         <MenuOutlined onClick={handleOpenMenu} className={styles['open-menu-btn']} />
       </>
     );
-  }, [isResponsiveMode, isMenuOpen]);
+  }, [isResponsiveMode, search, menu, isMenuOpen, handleOpenMenu]);
 
   useEffect(() => {
     const [width] = windowsSize;

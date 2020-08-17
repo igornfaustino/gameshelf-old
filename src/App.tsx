@@ -4,20 +4,17 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import { Layout } from 'antd';
 
-import styles from './App.module.scss';
 import Header from './components/Header';
 import Routes from './routes';
 
-const { Footer, Content } = Layout;
+const { Footer } = Layout;
 
 const App: React.FC = () => {
   return (
     <Router>
       <Layout style={{ width: '100%' }}>
         <Header />
-        {/* <Content className={styles.content}> */}
         <Routes />
-        {/* </Content> */}
         <Footer style={{ textAlign: 'center' }}>
           GameShelf ©2020 Created by Igor Neves Faustino{' '}
           <div>

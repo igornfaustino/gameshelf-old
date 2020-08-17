@@ -1,10 +1,8 @@
-import { GameType, GameAndList } from '../types/common';
 import TO_PLAY_IMG from '../assets/003-bookshelf.svg';
 import PLAYING_IMG from '../assets/001-game-controller.svg';
 import COMPLETED_IMG from '../assets/002-award.svg';
 import ABANDONED_IMG from '../assets/004-spider-web.svg';
 
-// eslint-disable-next-line import/prefer-default-export
 export function binarySearch<T>(
   list: T[],
   value: number,
@@ -25,40 +23,6 @@ export function binarySearch<T>(
   }
   return undefined;
 }
-
-// export const joinGamesAndCachedInfo = (games: GameType[], cached: GameAndList[]): GameType[] => {
-//   const sortedCached = cached.sort((a, b) => a.gameId - b.gameId);
-//   return games.map((game) => {
-//     const cachedInfo = binarySearch<GameAndList>(
-//       sortedCached,
-//       Number(game.id),
-//       (element) => element.gameId
-//     );
-//     if (!cachedInfo) return game;
-//     return { ...game, userList: cachedInfo.userList, userListId: cachedInfo.listId };
-//   });
-// };
-
-// export const filterGamesThatAreNoLongOnTheList = (
-//   games: GameType[],
-//   cached: GameAndList[],
-//   currentListId: string
-// ): GameType[] => {
-//   const sortedCached = cached.sort((a, b) => a.gameId - b.gameId);
-//   return games
-//     .map((game) => {
-//       const cachedInfo = binarySearch<GameAndList>(
-//         sortedCached,
-//         Number(game.id),
-//         (element) => element.gameId
-//       );
-//       if (!cachedInfo) return { ...game, userListId: currentListId };
-//       if (cachedInfo.listId === currentListId)
-//         return { ...game, userList: cachedInfo.userList, userListId: cachedInfo.listId };
-//       return undefined;
-//     })
-//     .filter((game) => game !== undefined) as GameType[];
-// };
 
 export const LIST_ICONS: { [index: string]: string } = {
   'To Play': TO_PLAY_IMG,
