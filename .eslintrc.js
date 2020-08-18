@@ -34,7 +34,7 @@ module.exports = {
   plugins: ['react', '@typescript-eslint', 'prettier', 'react-hooks'],
   rules: {
     'prettier/prettier': ['error'],
-    'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.jsx'] }],
+    'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.jsx', '.js'] }],
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
     'react/jsx-props-no-spreading': 'off',

@@ -1,0 +1,1809 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Queries file Assert ADD_GAME query 1`] = `
+Object {
+  "definitions": Array [
+    Object {
+      "directives": Array [],
+      "kind": "OperationDefinition",
+      "name": Object {
+        "kind": "Name",
+        "value": "addOrMoveGameToList",
+      },
+      "operation": "mutation",
+      "selectionSet": Object {
+        "kind": "SelectionSet",
+        "selections": Array [
+          Object {
+            "alias": undefined,
+            "arguments": Array [
+              Object {
+                "kind": "Argument",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "gameId",
+                },
+                "value": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "gameId",
+                  },
+                },
+              },
+              Object {
+                "kind": "Argument",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "listId",
+                },
+                "value": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "listId",
+                  },
+                },
+              },
+              Object {
+                "kind": "Argument",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "name",
+                },
+                "value": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "name",
+                  },
+                },
+              },
+              Object {
+                "kind": "Argument",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "coverURL",
+                },
+                "value": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "coverURL",
+                  },
+                },
+              },
+              Object {
+                "kind": "Argument",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "genres",
+                },
+                "value": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "genres",
+                  },
+                },
+              },
+              Object {
+                "kind": "Argument",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "platforms",
+                },
+                "value": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "platforms",
+                  },
+                },
+              },
+              Object {
+                "kind": "Argument",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "similarGames",
+                },
+                "value": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "similarGames",
+                  },
+                },
+              },
+            ],
+            "directives": Array [],
+            "kind": "Field",
+            "name": Object {
+              "kind": "Name",
+              "value": "addOrMoveGameToList",
+            },
+            "selectionSet": Object {
+              "kind": "SelectionSet",
+              "selections": Array [
+                Object {
+                  "alias": undefined,
+                  "arguments": Array [],
+                  "directives": Array [],
+                  "kind": "Field",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "id",
+                  },
+                  "selectionSet": undefined,
+                },
+                Object {
+                  "alias": undefined,
+                  "arguments": Array [],
+                  "directives": Array [],
+                  "kind": "Field",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "list",
+                  },
+                  "selectionSet": Object {
+                    "kind": "SelectionSet",
+                    "selections": Array [
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "id",
+                        },
+                        "selectionSet": undefined,
+                      },
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "name",
+                        },
+                        "selectionSet": undefined,
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+      "variableDefinitions": Array [
+        Object {
+          "defaultValue": undefined,
+          "directives": Array [],
+          "kind": "VariableDefinition",
+          "type": Object {
+            "kind": "NonNullType",
+            "type": Object {
+              "kind": "NamedType",
+              "name": Object {
+                "kind": "Name",
+                "value": "ID",
+              },
+            },
+          },
+          "variable": Object {
+            "kind": "Variable",
+            "name": Object {
+              "kind": "Name",
+              "value": "gameId",
+            },
+          },
+        },
+        Object {
+          "defaultValue": undefined,
+          "directives": Array [],
+          "kind": "VariableDefinition",
+          "type": Object {
+            "kind": "NonNullType",
+            "type": Object {
+              "kind": "NamedType",
+              "name": Object {
+                "kind": "Name",
+                "value": "ID",
+              },
+            },
+          },
+          "variable": Object {
+            "kind": "Variable",
+            "name": Object {
+              "kind": "Name",
+              "value": "listId",
+            },
+          },
+        },
+        Object {
+          "defaultValue": undefined,
+          "directives": Array [],
+          "kind": "VariableDefinition",
+          "type": Object {
+            "kind": "NonNullType",
+            "type": Object {
+              "kind": "NamedType",
+              "name": Object {
+                "kind": "Name",
+                "value": "String",
+              },
+            },
+          },
+          "variable": Object {
+            "kind": "Variable",
+            "name": Object {
+              "kind": "Name",
+              "value": "name",
+            },
+          },
+        },
+        Object {
+          "defaultValue": undefined,
+          "directives": Array [],
+          "kind": "VariableDefinition",
+          "type": Object {
+            "kind": "NonNullType",
+            "type": Object {
+              "kind": "NamedType",
+              "name": Object {
+                "kind": "Name",
+                "value": "String",
+              },
+            },
+          },
+          "variable": Object {
+            "kind": "Variable",
+            "name": Object {
+              "kind": "Name",
+              "value": "coverURL",
+            },
+          },
+        },
+        Object {
+          "defaultValue": undefined,
+          "directives": Array [],
+          "kind": "VariableDefinition",
+          "type": Object {
+            "kind": "NonNullType",
+            "type": Object {
+              "kind": "ListType",
+              "type": Object {
+                "kind": "NamedType",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "ID",
+                },
+              },
+            },
+          },
+          "variable": Object {
+            "kind": "Variable",
+            "name": Object {
+              "kind": "Name",
+              "value": "genres",
+            },
+          },
+        },
+        Object {
+          "defaultValue": undefined,
+          "directives": Array [],
+          "kind": "VariableDefinition",
+          "type": Object {
+            "kind": "NonNullType",
+            "type": Object {
+              "kind": "ListType",
+              "type": Object {
+                "kind": "NamedType",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "ID",
+                },
+              },
+            },
+          },
+          "variable": Object {
+            "kind": "Variable",
+            "name": Object {
+              "kind": "Name",
+              "value": "platforms",
+            },
+          },
+        },
+        Object {
+          "defaultValue": undefined,
+          "directives": Array [],
+          "kind": "VariableDefinition",
+          "type": Object {
+            "kind": "NonNullType",
+            "type": Object {
+              "kind": "ListType",
+              "type": Object {
+                "kind": "NamedType",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "ID",
+                },
+              },
+            },
+          },
+          "variable": Object {
+            "kind": "Variable",
+            "name": Object {
+              "kind": "Name",
+              "value": "similarGames",
+            },
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "Document",
+  "loc": Object {
+    "end": 450,
+    "start": 0,
+  },
+}
+`;
+
+exports[`Queries file Assert GET_GAMES_FROM_LIST query 1`] = `
+Object {
+  "definitions": Array [
+    Object {
+      "directives": Array [],
+      "kind": "OperationDefinition",
+      "name": Object {
+        "kind": "Name",
+        "value": "getGamesFromList",
+      },
+      "operation": "query",
+      "selectionSet": Object {
+        "kind": "SelectionSet",
+        "selections": Array [
+          Object {
+            "alias": undefined,
+            "arguments": Array [
+              Object {
+                "kind": "Argument",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "listId",
+                },
+                "value": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "listId",
+                  },
+                },
+              },
+              Object {
+                "kind": "Argument",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "platforms",
+                },
+                "value": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "platforms",
+                  },
+                },
+              },
+              Object {
+                "kind": "Argument",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "genres",
+                },
+                "value": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "genres",
+                  },
+                },
+              },
+              Object {
+                "kind": "Argument",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "limit",
+                },
+                "value": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "limit",
+                  },
+                },
+              },
+              Object {
+                "kind": "Argument",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "offset",
+                },
+                "value": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "offset",
+                  },
+                },
+              },
+            ],
+            "directives": Array [],
+            "kind": "Field",
+            "name": Object {
+              "kind": "Name",
+              "value": "getGamesFromList",
+            },
+            "selectionSet": Object {
+              "kind": "SelectionSet",
+              "selections": Array [
+                Object {
+                  "alias": undefined,
+                  "arguments": Array [],
+                  "directives": Array [],
+                  "kind": "Field",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "count",
+                  },
+                  "selectionSet": undefined,
+                },
+                Object {
+                  "alias": undefined,
+                  "arguments": Array [],
+                  "directives": Array [],
+                  "kind": "Field",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "games",
+                  },
+                  "selectionSet": Object {
+                    "kind": "SelectionSet",
+                    "selections": Array [
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "id",
+                        },
+                        "selectionSet": undefined,
+                      },
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "name",
+                        },
+                        "selectionSet": undefined,
+                      },
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "coverURL",
+                        },
+                        "selectionSet": undefined,
+                      },
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "genres",
+                        },
+                        "selectionSet": Object {
+                          "kind": "SelectionSet",
+                          "selections": Array [
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "id",
+                              },
+                              "selectionSet": undefined,
+                            },
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "name",
+                              },
+                              "selectionSet": undefined,
+                            },
+                          ],
+                        },
+                      },
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "platforms",
+                        },
+                        "selectionSet": Object {
+                          "kind": "SelectionSet",
+                          "selections": Array [
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "id",
+                              },
+                              "selectionSet": undefined,
+                            },
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "name",
+                              },
+                              "selectionSet": undefined,
+                            },
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "abbreviation",
+                              },
+                              "selectionSet": undefined,
+                            },
+                          ],
+                        },
+                      },
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "similarGames",
+                        },
+                        "selectionSet": undefined,
+                      },
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "list",
+                        },
+                        "selectionSet": Object {
+                          "kind": "SelectionSet",
+                          "selections": Array [
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "id",
+                              },
+                              "selectionSet": undefined,
+                            },
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "name",
+                              },
+                              "selectionSet": undefined,
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+      "variableDefinitions": Array [
+        Object {
+          "defaultValue": undefined,
+          "directives": Array [],
+          "kind": "VariableDefinition",
+          "type": Object {
+            "kind": "NamedType",
+            "name": Object {
+              "kind": "Name",
+              "value": "ID",
+            },
+          },
+          "variable": Object {
+            "kind": "Variable",
+            "name": Object {
+              "kind": "Name",
+              "value": "listId",
+            },
+          },
+        },
+        Object {
+          "defaultValue": undefined,
+          "directives": Array [],
+          "kind": "VariableDefinition",
+          "type": Object {
+            "kind": "ListType",
+            "type": Object {
+              "kind": "NamedType",
+              "name": Object {
+                "kind": "Name",
+                "value": "Int",
+              },
+            },
+          },
+          "variable": Object {
+            "kind": "Variable",
+            "name": Object {
+              "kind": "Name",
+              "value": "platforms",
+            },
+          },
+        },
+        Object {
+          "defaultValue": undefined,
+          "directives": Array [],
+          "kind": "VariableDefinition",
+          "type": Object {
+            "kind": "ListType",
+            "type": Object {
+              "kind": "NamedType",
+              "name": Object {
+                "kind": "Name",
+                "value": "Int",
+              },
+            },
+          },
+          "variable": Object {
+            "kind": "Variable",
+            "name": Object {
+              "kind": "Name",
+              "value": "genres",
+            },
+          },
+        },
+        Object {
+          "defaultValue": undefined,
+          "directives": Array [],
+          "kind": "VariableDefinition",
+          "type": Object {
+            "kind": "NamedType",
+            "name": Object {
+              "kind": "Name",
+              "value": "Int",
+            },
+          },
+          "variable": Object {
+            "kind": "Variable",
+            "name": Object {
+              "kind": "Name",
+              "value": "limit",
+            },
+          },
+        },
+        Object {
+          "defaultValue": undefined,
+          "directives": Array [],
+          "kind": "VariableDefinition",
+          "type": Object {
+            "kind": "NamedType",
+            "name": Object {
+              "kind": "Name",
+              "value": "Int",
+            },
+          },
+          "variable": Object {
+            "kind": "Variable",
+            "name": Object {
+              "kind": "Name",
+              "value": "offset",
+            },
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "Document",
+  "loc": Object {
+    "end": 562,
+    "start": 0,
+  },
+}
+`;
+
+exports[`Queries file Assert GET_GENRES query 1`] = `
+Object {
+  "definitions": Array [
+    Object {
+      "directives": Array [],
+      "kind": "OperationDefinition",
+      "name": undefined,
+      "operation": "query",
+      "selectionSet": Object {
+        "kind": "SelectionSet",
+        "selections": Array [
+          Object {
+            "alias": undefined,
+            "arguments": Array [],
+            "directives": Array [],
+            "kind": "Field",
+            "name": Object {
+              "kind": "Name",
+              "value": "genres",
+            },
+            "selectionSet": Object {
+              "kind": "SelectionSet",
+              "selections": Array [
+                Object {
+                  "alias": undefined,
+                  "arguments": Array [],
+                  "directives": Array [],
+                  "kind": "Field",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "id",
+                  },
+                  "selectionSet": undefined,
+                },
+                Object {
+                  "alias": undefined,
+                  "arguments": Array [],
+                  "directives": Array [],
+                  "kind": "Field",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "name",
+                  },
+                  "selectionSet": undefined,
+                },
+              ],
+            },
+          },
+        ],
+      },
+      "variableDefinitions": Array [],
+    },
+  ],
+  "kind": "Document",
+  "loc": Object {
+    "end": 48,
+    "start": 0,
+  },
+}
+`;
+
+exports[`Queries file Assert GET_LISTS query 1`] = `
+Object {
+  "definitions": Array [
+    Object {
+      "directives": Array [],
+      "kind": "OperationDefinition",
+      "name": undefined,
+      "operation": "query",
+      "selectionSet": Object {
+        "kind": "SelectionSet",
+        "selections": Array [
+          Object {
+            "alias": undefined,
+            "arguments": Array [],
+            "directives": Array [],
+            "kind": "Field",
+            "name": Object {
+              "kind": "Name",
+              "value": "lists",
+            },
+            "selectionSet": Object {
+              "kind": "SelectionSet",
+              "selections": Array [
+                Object {
+                  "alias": undefined,
+                  "arguments": Array [],
+                  "directives": Array [],
+                  "kind": "Field",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "count",
+                  },
+                  "selectionSet": undefined,
+                },
+                Object {
+                  "alias": undefined,
+                  "arguments": Array [],
+                  "directives": Array [],
+                  "kind": "Field",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "list",
+                  },
+                  "selectionSet": Object {
+                    "kind": "SelectionSet",
+                    "selections": Array [
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "id",
+                        },
+                        "selectionSet": undefined,
+                      },
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "name",
+                        },
+                        "selectionSet": undefined,
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+      "variableDefinitions": Array [],
+    },
+  ],
+  "kind": "Document",
+  "loc": Object {
+    "end": 84,
+    "start": 0,
+  },
+}
+`;
+
+exports[`Queries file Assert GET_PLATFORMS query 1`] = `
+Object {
+  "definitions": Array [
+    Object {
+      "directives": Array [],
+      "kind": "OperationDefinition",
+      "name": undefined,
+      "operation": "query",
+      "selectionSet": Object {
+        "kind": "SelectionSet",
+        "selections": Array [
+          Object {
+            "alias": undefined,
+            "arguments": Array [],
+            "directives": Array [],
+            "kind": "Field",
+            "name": Object {
+              "kind": "Name",
+              "value": "platforms",
+            },
+            "selectionSet": Object {
+              "kind": "SelectionSet",
+              "selections": Array [
+                Object {
+                  "alias": undefined,
+                  "arguments": Array [],
+                  "directives": Array [],
+                  "kind": "Field",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "id",
+                  },
+                  "selectionSet": undefined,
+                },
+                Object {
+                  "alias": undefined,
+                  "arguments": Array [],
+                  "directives": Array [],
+                  "kind": "Field",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "name",
+                  },
+                  "selectionSet": undefined,
+                },
+                Object {
+                  "alias": undefined,
+                  "arguments": Array [],
+                  "directives": Array [],
+                  "kind": "Field",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "abbreviation",
+                  },
+                  "selectionSet": undefined,
+                },
+              ],
+            },
+          },
+        ],
+      },
+      "variableDefinitions": Array [],
+    },
+  ],
+  "kind": "Document",
+  "loc": Object {
+    "end": 70,
+    "start": 0,
+  },
+}
+`;
+
+exports[`Queries file Assert LOGIN query 1`] = `
+Object {
+  "definitions": Array [
+    Object {
+      "directives": Array [],
+      "kind": "OperationDefinition",
+      "name": Object {
+        "kind": "Name",
+        "value": "login",
+      },
+      "operation": "mutation",
+      "selectionSet": Object {
+        "kind": "SelectionSet",
+        "selections": Array [
+          Object {
+            "alias": undefined,
+            "arguments": Array [
+              Object {
+                "kind": "Argument",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "email",
+                },
+                "value": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "email",
+                  },
+                },
+              },
+              Object {
+                "kind": "Argument",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "password",
+                },
+                "value": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "password",
+                  },
+                },
+              },
+            ],
+            "directives": Array [],
+            "kind": "Field",
+            "name": Object {
+              "kind": "Name",
+              "value": "login",
+            },
+            "selectionSet": Object {
+              "kind": "SelectionSet",
+              "selections": Array [
+                Object {
+                  "alias": undefined,
+                  "arguments": Array [],
+                  "directives": Array [],
+                  "kind": "Field",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "token",
+                  },
+                  "selectionSet": undefined,
+                },
+              ],
+            },
+          },
+        ],
+      },
+      "variableDefinitions": Array [
+        Object {
+          "defaultValue": undefined,
+          "directives": Array [],
+          "kind": "VariableDefinition",
+          "type": Object {
+            "kind": "NonNullType",
+            "type": Object {
+              "kind": "NamedType",
+              "name": Object {
+                "kind": "Name",
+                "value": "String",
+              },
+            },
+          },
+          "variable": Object {
+            "kind": "Variable",
+            "name": Object {
+              "kind": "Name",
+              "value": "email",
+            },
+          },
+        },
+        Object {
+          "defaultValue": undefined,
+          "directives": Array [],
+          "kind": "VariableDefinition",
+          "type": Object {
+            "kind": "NonNullType",
+            "type": Object {
+              "kind": "NamedType",
+              "name": Object {
+                "kind": "Name",
+                "value": "String",
+              },
+            },
+          },
+          "variable": Object {
+            "kind": "Variable",
+            "name": Object {
+              "kind": "Name",
+              "value": "password",
+            },
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "Document",
+  "loc": Object {
+    "end": 127,
+    "start": 0,
+  },
+}
+`;
+
+exports[`Queries file Assert REMOVE_GAME query 1`] = `
+Object {
+  "definitions": Array [
+    Object {
+      "directives": Array [],
+      "kind": "OperationDefinition",
+      "name": Object {
+        "kind": "Name",
+        "value": "removeGameFromList",
+      },
+      "operation": "mutation",
+      "selectionSet": Object {
+        "kind": "SelectionSet",
+        "selections": Array [
+          Object {
+            "alias": undefined,
+            "arguments": Array [
+              Object {
+                "kind": "Argument",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "gameId",
+                },
+                "value": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "gameId",
+                  },
+                },
+              },
+            ],
+            "directives": Array [],
+            "kind": "Field",
+            "name": Object {
+              "kind": "Name",
+              "value": "removeGameFromList",
+            },
+            "selectionSet": Object {
+              "kind": "SelectionSet",
+              "selections": Array [
+                Object {
+                  "alias": undefined,
+                  "arguments": Array [],
+                  "directives": Array [],
+                  "kind": "Field",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "id",
+                  },
+                  "selectionSet": undefined,
+                },
+                Object {
+                  "alias": undefined,
+                  "arguments": Array [],
+                  "directives": Array [],
+                  "kind": "Field",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "list",
+                  },
+                  "selectionSet": Object {
+                    "kind": "SelectionSet",
+                    "selections": Array [
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "id",
+                        },
+                        "selectionSet": undefined,
+                      },
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "name",
+                        },
+                        "selectionSet": undefined,
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+      "variableDefinitions": Array [
+        Object {
+          "defaultValue": undefined,
+          "directives": Array [],
+          "kind": "VariableDefinition",
+          "type": Object {
+            "kind": "NonNullType",
+            "type": Object {
+              "kind": "NamedType",
+              "name": Object {
+                "kind": "Name",
+                "value": "ID",
+              },
+            },
+          },
+          "variable": Object {
+            "kind": "Variable",
+            "name": Object {
+              "kind": "Name",
+              "value": "gameId",
+            },
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "Document",
+  "loc": Object {
+    "end": 153,
+    "start": 0,
+  },
+}
+`;
+
+exports[`Queries file Assert SEARCH_GAME query 1`] = `
+Object {
+  "definitions": Array [
+    Object {
+      "directives": Array [],
+      "kind": "OperationDefinition",
+      "name": Object {
+        "kind": "Name",
+        "value": "searchGames",
+      },
+      "operation": "query",
+      "selectionSet": Object {
+        "kind": "SelectionSet",
+        "selections": Array [
+          Object {
+            "alias": undefined,
+            "arguments": Array [
+              Object {
+                "kind": "Argument",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "search",
+                },
+                "value": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "search",
+                  },
+                },
+              },
+              Object {
+                "kind": "Argument",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "platforms",
+                },
+                "value": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "platforms",
+                  },
+                },
+              },
+              Object {
+                "kind": "Argument",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "genres",
+                },
+                "value": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "genres",
+                  },
+                },
+              },
+              Object {
+                "kind": "Argument",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "limit",
+                },
+                "value": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "limit",
+                  },
+                },
+              },
+              Object {
+                "kind": "Argument",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "offset",
+                },
+                "value": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "offset",
+                  },
+                },
+              },
+            ],
+            "directives": Array [],
+            "kind": "Field",
+            "name": Object {
+              "kind": "Name",
+              "value": "searchGames",
+            },
+            "selectionSet": Object {
+              "kind": "SelectionSet",
+              "selections": Array [
+                Object {
+                  "alias": undefined,
+                  "arguments": Array [],
+                  "directives": Array [],
+                  "kind": "Field",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "count",
+                  },
+                  "selectionSet": undefined,
+                },
+                Object {
+                  "alias": undefined,
+                  "arguments": Array [],
+                  "directives": Array [],
+                  "kind": "Field",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "games",
+                  },
+                  "selectionSet": Object {
+                    "kind": "SelectionSet",
+                    "selections": Array [
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "id",
+                        },
+                        "selectionSet": undefined,
+                      },
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "name",
+                        },
+                        "selectionSet": undefined,
+                      },
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "coverURL",
+                        },
+                        "selectionSet": undefined,
+                      },
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "genres",
+                        },
+                        "selectionSet": Object {
+                          "kind": "SelectionSet",
+                          "selections": Array [
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "id",
+                              },
+                              "selectionSet": undefined,
+                            },
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "name",
+                              },
+                              "selectionSet": undefined,
+                            },
+                          ],
+                        },
+                      },
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "platforms",
+                        },
+                        "selectionSet": Object {
+                          "kind": "SelectionSet",
+                          "selections": Array [
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "id",
+                              },
+                              "selectionSet": undefined,
+                            },
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "name",
+                              },
+                              "selectionSet": undefined,
+                            },
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "abbreviation",
+                              },
+                              "selectionSet": undefined,
+                            },
+                          ],
+                        },
+                      },
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "similarGames",
+                        },
+                        "selectionSet": undefined,
+                      },
+                      Object {
+                        "alias": undefined,
+                        "arguments": Array [],
+                        "directives": Array [],
+                        "kind": "Field",
+                        "name": Object {
+                          "kind": "Name",
+                          "value": "list",
+                        },
+                        "selectionSet": Object {
+                          "kind": "SelectionSet",
+                          "selections": Array [
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "id",
+                              },
+                              "selectionSet": undefined,
+                            },
+                            Object {
+                              "alias": undefined,
+                              "arguments": Array [],
+                              "directives": Array [],
+                              "kind": "Field",
+                              "name": Object {
+                                "kind": "Name",
+                                "value": "name",
+                              },
+                              "selectionSet": undefined,
+                            },
+                          ],
+                        },
+                      },
+                    ],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+      "variableDefinitions": Array [
+        Object {
+          "defaultValue": undefined,
+          "directives": Array [],
+          "kind": "VariableDefinition",
+          "type": Object {
+            "kind": "NonNullType",
+            "type": Object {
+              "kind": "NamedType",
+              "name": Object {
+                "kind": "Name",
+                "value": "String",
+              },
+            },
+          },
+          "variable": Object {
+            "kind": "Variable",
+            "name": Object {
+              "kind": "Name",
+              "value": "search",
+            },
+          },
+        },
+        Object {
+          "defaultValue": undefined,
+          "directives": Array [],
+          "kind": "VariableDefinition",
+          "type": Object {
+            "kind": "ListType",
+            "type": Object {
+              "kind": "NamedType",
+              "name": Object {
+                "kind": "Name",
+                "value": "Int",
+              },
+            },
+          },
+          "variable": Object {
+            "kind": "Variable",
+            "name": Object {
+              "kind": "Name",
+              "value": "platforms",
+            },
+          },
+        },
+        Object {
+          "defaultValue": undefined,
+          "directives": Array [],
+          "kind": "VariableDefinition",
+          "type": Object {
+            "kind": "ListType",
+            "type": Object {
+              "kind": "NamedType",
+              "name": Object {
+                "kind": "Name",
+                "value": "Int",
+              },
+            },
+          },
+          "variable": Object {
+            "kind": "Variable",
+            "name": Object {
+              "kind": "Name",
+              "value": "genres",
+            },
+          },
+        },
+        Object {
+          "defaultValue": undefined,
+          "directives": Array [],
+          "kind": "VariableDefinition",
+          "type": Object {
+            "kind": "NamedType",
+            "name": Object {
+              "kind": "Name",
+              "value": "Int",
+            },
+          },
+          "variable": Object {
+            "kind": "Variable",
+            "name": Object {
+              "kind": "Name",
+              "value": "limit",
+            },
+          },
+        },
+        Object {
+          "defaultValue": undefined,
+          "directives": Array [],
+          "kind": "VariableDefinition",
+          "type": Object {
+            "kind": "NamedType",
+            "name": Object {
+              "kind": "Name",
+              "value": "Int",
+            },
+          },
+          "variable": Object {
+            "kind": "Variable",
+            "name": Object {
+              "kind": "Name",
+              "value": "offset",
+            },
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "Document",
+  "loc": Object {
+    "end": 557,
+    "start": 0,
+  },
+}
+`;
+
+exports[`Queries file Assert SING_UP query 1`] = `
+Object {
+  "definitions": Array [
+    Object {
+      "directives": Array [],
+      "kind": "OperationDefinition",
+      "name": Object {
+        "kind": "Name",
+        "value": "singUp",
+      },
+      "operation": "mutation",
+      "selectionSet": Object {
+        "kind": "SelectionSet",
+        "selections": Array [
+          Object {
+            "alias": undefined,
+            "arguments": Array [
+              Object {
+                "kind": "Argument",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "name",
+                },
+                "value": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "name",
+                  },
+                },
+              },
+              Object {
+                "kind": "Argument",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "email",
+                },
+                "value": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "email",
+                  },
+                },
+              },
+              Object {
+                "kind": "Argument",
+                "name": Object {
+                  "kind": "Name",
+                  "value": "password",
+                },
+                "value": Object {
+                  "kind": "Variable",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "password",
+                  },
+                },
+              },
+            ],
+            "directives": Array [],
+            "kind": "Field",
+            "name": Object {
+              "kind": "Name",
+              "value": "singUp",
+            },
+            "selectionSet": Object {
+              "kind": "SelectionSet",
+              "selections": Array [
+                Object {
+                  "alias": undefined,
+                  "arguments": Array [],
+                  "directives": Array [],
+                  "kind": "Field",
+                  "name": Object {
+                    "kind": "Name",
+                    "value": "token",
+                  },
+                  "selectionSet": undefined,
+                },
+              ],
+            },
+          },
+        ],
+      },
+      "variableDefinitions": Array [
+        Object {
+          "defaultValue": undefined,
+          "directives": Array [],
+          "kind": "VariableDefinition",
+          "type": Object {
+            "kind": "NonNullType",
+            "type": Object {
+              "kind": "NamedType",
+              "name": Object {
+                "kind": "Name",
+                "value": "String",
+              },
+            },
+          },
+          "variable": Object {
+            "kind": "Variable",
+            "name": Object {
+              "kind": "Name",
+              "value": "name",
+            },
+          },
+        },
+        Object {
+          "defaultValue": undefined,
+          "directives": Array [],
+          "kind": "VariableDefinition",
+          "type": Object {
+            "kind": "NonNullType",
+            "type": Object {
+              "kind": "NamedType",
+              "name": Object {
+                "kind": "Name",
+                "value": "String",
+              },
+            },
+          },
+          "variable": Object {
+            "kind": "Variable",
+            "name": Object {
+              "kind": "Name",
+              "value": "email",
+            },
+          },
+        },
+        Object {
+          "defaultValue": undefined,
+          "directives": Array [],
+          "kind": "VariableDefinition",
+          "type": Object {
+            "kind": "NonNullType",
+            "type": Object {
+              "kind": "NamedType",
+              "name": Object {
+                "kind": "Name",
+                "value": "String",
+              },
+            },
+          },
+          "variable": Object {
+            "kind": "Variable",
+            "name": Object {
+              "kind": "Name",
+              "value": "password",
+            },
+          },
+        },
+      ],
+    },
+  ],
+  "kind": "Document",
+  "loc": Object {
+    "end": 158,
+    "start": 0,
+  },
+}
+`;

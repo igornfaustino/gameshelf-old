@@ -3,7 +3,7 @@ import React, { useMemo, useState, useEffect } from 'react';
 import { Button } from 'antd';
 import { useQuery } from '@apollo/react-hooks';
 
-import useRouteQuery from '../hooks/useQuery';
+import useURLQuery from '../hooks/useURLQuery';
 import { GameType } from '../types/common';
 import styles from './Search.module.scss';
 import FilterForm from '../components/FilterForm';
@@ -26,8 +26,8 @@ const Search: React.FC = () => {
   const [genres, setGenres] = useState<undefined | number[]>(undefined);
   const [games, setGames] = useState<GameType[]>([]);
 
-  const query = useRouteQuery();
-  const gameQuery = query.get('q');
+  const queries = useURLQuery();
+  const gameQuery = queries.get('q');
 
   const { loading, error, data, refetch } = useQuery<Query>(SEARCH_GAME, {
     variables: {

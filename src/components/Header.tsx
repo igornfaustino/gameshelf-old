@@ -68,25 +68,30 @@ const Header: React.FC = () => {
 
   const search = useMemo(
     () => (
-      <Search placeholder="input search text" onSearch={handleSearch} className={styles.search} />
+      <Search
+        data-testid="search-bar"
+        placeholder="search game..."
+        onSearch={handleSearch}
+        className={styles.search}
+      />
     ),
     [handleSearch]
   );
 
   const menu = useMemo(() => {
     const offlineMenu = [
-      <Button type="link" key="login" onClick={handleLoginClick}>
+      <Button data-testid="login-menu" type="link" key="login" onClick={handleLoginClick}>
         Login
       </Button>,
-      <Button type="link" key="singup" onClick={handleSingUpClick}>
+      <Button data-testid="singup-menu" type="link" key="singup" onClick={handleSingUpClick}>
         Sing Up
       </Button>,
     ];
     const onlineMenu = [
-      <Button type="link" key="lists" onClick={handleList}>
+      <Button data-testid="list-menu" type="link" key="lists" onClick={handleList}>
         My Lists
       </Button>,
-      <Button type="link" key="logout" onClick={handleLogout}>
+      <Button data-testid="logout-menu" type="link" key="logout" onClick={handleLogout}>
         Logout
       </Button>,
     ];
@@ -106,6 +111,7 @@ const Header: React.FC = () => {
       return (
         <>
           <MenuOutlined
+            data-testid="colapse-menu"
             onClick={handleOpenMenu}
             className={cx(styles['open-menu-btn'], styles['open-menu-btn--collapsed'])}
           />
@@ -117,7 +123,11 @@ const Header: React.FC = () => {
       );
     return (
       <>
-        <MenuOutlined onClick={handleOpenMenu} className={styles['open-menu-btn']} />
+        <MenuOutlined
+          data-testid="colapse-menu"
+          onClick={handleOpenMenu}
+          className={styles['open-menu-btn']}
+        />
       </>
     );
   }, [isResponsiveMode, search, menu, isMenuOpen, handleOpenMenu]);
@@ -131,6 +141,7 @@ const Header: React.FC = () => {
   return (
     <HeaderAntd className={headerClassnames}>
       <Button
+        data-testid="brand"
         type="link"
         className={styles['header-title']}
         size="large"

@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Assert list icons path 1`] = `"{\\"To Play\\":\\"003-bookshelf.svg\\",\\"Playing\\":\\"001-game-controller.svg\\",\\"Completed\\":\\"002-award.svg\\",\\"Abandoned\\":\\"004-spider-web.svg\\"}"`;
