@@ -3,7 +3,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import { useHistory } from 'react-router-dom';
 import { Input, Button, Typography } from 'antd';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 
 import styles from './SingUp.module.scss';
 import { SING_UP } from '../helpers/queries';

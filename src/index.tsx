@@ -1,22 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-const client = new ApolloClient({
+const httpLink = createHttpLink({
   // uri: 'https://gameshelf-backend.herokuapp.com/graphql',
   uri: 'http://localhost:4000/graphql',
-  request: (operation): void => {
-    const token = localStorage.getItem('token');
-    operation.setContext({
-      headers: {
-        authorization: token ? `${token}` : '',
-      },
-    });
-  },
+});
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('token');
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `${token}` : '',
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
 });
 
 ReactDOM.render(

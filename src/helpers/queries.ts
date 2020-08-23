@@ -1,4 +1,4 @@
-import { gql } from 'apollo-boost';
+import { gql } from '@apollo/client';
 
 export const REMOVE_GAME = gql`
   mutation removeGameFromList($gameId: ID!) {

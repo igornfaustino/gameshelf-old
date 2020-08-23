@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 
 import { Button } from 'antd';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 
 import { GameType, GameAndList } from '../types/common';
 import GamesDisplay from '../components/GamesDisplay';

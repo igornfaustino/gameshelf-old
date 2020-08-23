@@ -1,6 +1,6 @@
 import React, { useMemo, useCallback } from 'react';
 
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { Select } from 'antd';
 import { Platform, Genres } from '../types/common';
 import { GET_PLATFORMS, GET_GENRES } from '../helpers/queries';

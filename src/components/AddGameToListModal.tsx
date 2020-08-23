@@ -3,7 +3,7 @@ import React, { useMemo, useCallback, useState } from 'react';
 import { Modal, Button } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { CloseOutlined } from '@ant-design/icons';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation } from '@apollo/client';
 import cx from 'classnames';
 
 import styles from './AddGameToListModal.module.scss';

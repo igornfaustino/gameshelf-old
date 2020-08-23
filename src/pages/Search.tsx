@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useEffect } from 'react';
 
 import { Button } from 'antd';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 
 import useURLQuery from '../hooks/useURLQuery';
 import { GameType } from '../types/common';

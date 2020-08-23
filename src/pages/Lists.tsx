@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useCallback, useEffect } from 'react';
 
 import { Layout, Menu } from 'antd';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 
 import styles from './Lists.module.scss';
 import ListContent from './ListContent';

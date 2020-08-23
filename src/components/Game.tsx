@@ -1,7 +1,7 @@
 import React, { useMemo, useState, useCallback } from 'react';
 
 import { Button, Tag } from 'antd';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { PlusCircleFilled, RightCircleOutlined, CloseOutlined } from '@ant-design/icons';
 
 import { GameType } from '../types/common';
