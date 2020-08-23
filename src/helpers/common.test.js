@@ -1,4 +1,4 @@
-import { binarySearch, LIST_ICONS } from '../helpers/common';
+import { binarySearch, LIST_ICONS } from './common';
 
 test('Assert list icons path', () => {
   expect(JSON.stringify(LIST_ICONS)).toMatchSnapshot();

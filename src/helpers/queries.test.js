@@ -8,7 +8,7 @@ import {
   REMOVE_GAME,
   SEARCH_GAME,
   SING_UP,
-} from '../helpers/queries';
+} from './queries';
 
 describe('Queries file', () => {
   test('Assert GET_GAMES_FROM_LIST query', () => {

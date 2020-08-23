@@ -2,7 +2,7 @@ import React from 'react';
 import { render, fireEvent, act } from '@testing-library/react';
 import { useHistory } from 'react-router-dom';
 
-import Header from '../components/Header';
+import Header from './Header';
 
 jest.mock('react-router-dom', () => ({
   useHistory: jest.fn(),
