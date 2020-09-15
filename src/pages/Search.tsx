@@ -4,7 +4,7 @@ import { Button } from 'antd';
 import { useQuery } from '@apollo/client';
 
 import useURLQuery from '../hooks/useURLQuery';
-import { GameType } from '../types/common';
+import { GameAndList } from '../types/common';
 import styles from './Search.module.scss';
 import FilterForm from '../components/FilterForm';
 import GamesDisplay from '../components/GamesDisplay';
@@ -13,7 +13,7 @@ import Loading from '../components/Loading';
 
 interface Query {
   searchGames: {
-    games: GameType[];
+    gamesAndList: GameAndList[];
     count: number;
   };
 }
@@ -24,7 +24,7 @@ const Search: React.FC = () => {
   const [offset, setOffset] = useState(0);
   const [platforms, setPlatforms] = useState<undefined | number[]>(undefined);
   const [genres, setGenres] = useState<undefined | number[]>(undefined);
-  const [games, setGames] = useState<GameType[]>([]);
+  const [gamesAndList, setGamesAndList] = useState<GameAndList[]>([]);
 
   const queries = useURLQuery();
   const gameQuery = queries.get('q');
@@ -80,11 +80,11 @@ const Search: React.FC = () => {
         </div>
       ) : (
         <>
-          <GamesDisplay games={games} />
+          <GamesDisplay gamesAndList={gamesAndList} />
           <div className={styles.pages}>{pagination}</div>
         </>
       ),
-    [games, loading, pagination]
+    [gamesAndList, loading, pagination]
   );
 
   useEffect(() => {
@@ -92,14 +92,19 @@ const Search: React.FC = () => {
   }, [gameQuery, platforms, genres]);
 
   useEffect(() => {
-    const searchedGames = data?.searchGames.games;
-    if (!searchedGames) return setGames([]);
-    return setGames(searchedGames);
+    const searchedGames = data?.searchGames.gamesAndList;
+    if (!searchedGames) return setGamesAndList([]);
+    return setGamesAndList(searchedGames);
   }, [data]);
 
   useEffect(() => {
     refetch();
   }, [refetch]);
+
+  useEffect(() => {
+    if (!error) return;
+    console.log({ error });
+  }, [error]);
 
   return (
     <div className={styles.content}>

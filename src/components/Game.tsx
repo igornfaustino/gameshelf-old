@@ -4,21 +4,22 @@ import { Button, Tag } from 'antd';
 import { useMutation } from '@apollo/client';
 import { PlusCircleFilled, RightCircleOutlined, CloseOutlined } from '@ant-design/icons';
 
-import { GameType } from '../types/common';
+import { GameSimplified, List } from '../types/common';
 import styles from './Game.module.scss';
 import AddGameToListModal from './AddGameToListModal';
 import { REMOVE_GAME, GET_LISTS } from '../helpers/queries';
 import Loading from './Loading';
 
 interface RemoveGameMutation {
-  removeGameFromList: GameType;
+  removeGameFromList: GameSimplified;
 }
 
-interface GameCard extends GameType {
+interface GameCard extends GameSimplified {
   isUserListCard?: boolean;
+  list?: List;
 }
 
-const Game: React.FC<GameCard> = ({ isUserListCard, ...game }) => {
+const Game: React.FC<GameCard> = ({ isUserListCard, list, ...game }) => {
   const token = localStorage.getItem('token');
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -61,20 +62,20 @@ const Game: React.FC<GameCard> = ({ isUserListCard, ...game }) => {
     if (!token) return undefined;
     const removeBtn = <CloseOutlined onClick={handleRemoveGame} />;
     if (isUserListCard) return <div className={styles.listInfo}>{removeBtn}</div>;
-    if (!game.list?.name) return undefined;
+    if (!list?.name) return undefined;
     const infoContent = loading ? (
       <Loading fontSize={24} />
     ) : (
       <>
         {removeBtn}
-        <span>{game.list?.name}</span>
+        <span>{list?.name}</span>
       </>
     );
     return <div className={styles.listInfo}>{infoContent}</div>;
-  }, [game.list, handleRemoveGame, isUserListCard, loading, token]);
+  }, [list, handleRemoveGame, isUserListCard, loading, token]);
 
   const cardButton = useMemo(() => {
-    const isGameInList = game.list?.name || isUserListCard;
+    const isGameInList = list?.name || isUserListCard;
     if (isGameInList)
       return (
         <Button icon={<RightCircleOutlined />} type="default" onClick={handleModal}>
@@ -86,7 +87,7 @@ const Game: React.FC<GameCard> = ({ isUserListCard, ...game }) => {
         Add to
       </Button>
     );
-  }, [game.list, handleModal, isUserListCard]);
+  }, [list, handleModal, isUserListCard]);
 
   return (
     <div className={styles['game-card']}>
@@ -102,7 +103,12 @@ const Game: React.FC<GameCard> = ({ isUserListCard, ...game }) => {
         </p>
       </div>
       {cardButton}
-      <AddGameToListModal handleModal={handleModal} isModalVisible={isModalVisible} game={game} />
+      <AddGameToListModal
+        handleModal={handleModal}
+        isModalVisible={isModalVisible}
+        game={game}
+        gameList={list}
+      />
     </div>
   );
 };

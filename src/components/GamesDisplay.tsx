@@ -2,17 +2,20 @@ import React, { useMemo } from 'react';
 
 import Game from './Game';
 import styles from './GamesDisplay.module.scss';
-import { GameType } from '../types/common';
+import { GameAndList } from '../types/common';
 
 interface GameDisplayType {
-  games: GameType[];
+  gamesAndList: GameAndList[];
   isGamesOnList?: boolean;
 }
 
-const GamesDisplay: React.FC<GameDisplayType> = ({ games, isGamesOnList }) => {
+const GamesDisplay: React.FC<GameDisplayType> = ({ gamesAndList, isGamesOnList }) => {
   const gameCards = useMemo(
-    () => games.map((game) => <Game key={game.id} {...game} isUserListCard={isGamesOnList} />),
-    [games, isGamesOnList]
+    () =>
+      gamesAndList.map(({ gameInfo, list }) => (
+        <Game key={gameInfo.id} {...gameInfo} list={list} isUserListCard={isGamesOnList} />
+      )),
+    [gamesAndList, isGamesOnList]
   );
 
   return <div className={styles.games}>{gameCards}</div>;

@@ -2,7 +2,7 @@ import React, { useMemo, useCallback } from 'react';
 
 import { useQuery } from '@apollo/client';
 import { Select } from 'antd';
-import { Platform, Genres } from '../types/common';
+import { Platform, Genre } from '../types/common';
 import { GET_PLATFORMS, GET_GENRES } from '../helpers/queries';
 
 const { Option } = Select;
@@ -12,7 +12,7 @@ interface PlatformQuery {
 }
 
 interface GenreQuery {
-  genres: Genres[];
+  genres: Genre[];
 }
 
 interface FormProps {

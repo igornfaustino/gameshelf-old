@@ -8,7 +8,7 @@ import cx from 'classnames';
 
 import styles from './AddGameToListModal.module.scss';
 
-import { GameType } from '../types/common';
+import { GameSimplified, List } from '../types/common';
 import { LIST_ICONS } from '../helpers/common';
 import { GET_LISTS, ADD_GAME } from '../helpers/queries';
 import Loading from './Loading';
@@ -31,10 +31,11 @@ interface AddGameMutation {
 interface Props {
   isModalVisible: boolean;
   handleModal: () => void;
-  game: GameType;
+  game: GameSimplified;
+  gameList?: List;
 }
 
-const AddGameToListModal: React.FC<Props> = ({ isModalVisible, handleModal, game }) => {
+const AddGameToListModal: React.FC<Props> = ({ isModalVisible, handleModal, game, gameList }) => {
   const history = useHistory();
   const { data } = useQuery<ListQuery>(GET_LISTS);
   const [addOrMoveGameToList] = useMutation<AddGameMutation>(ADD_GAME, {
@@ -50,7 +51,6 @@ const AddGameToListModal: React.FC<Props> = ({ isModalVisible, handleModal, game
       platforms: game.platforms ? game.platforms.map((platform) => platform.id) : [],
       genres: game.genres ? game.genres.map((genre) => genre.id) : [],
       coverURL: game.coverURL,
-      similarGames: game.similarGames || [],
     }),
     [game]
   );
@@ -78,7 +78,7 @@ const AddGameToListModal: React.FC<Props> = ({ isModalVisible, handleModal, game
   const ListButtons = useMemo(
     () =>
       data?.lists.map(({ list }) => {
-        const isGameOnThisList = game.list && Number(game.list.id) === Number(list.id);
+        const isGameOnThisList = gameList && Number(gameList.id) === Number(list.id);
 
         const onClickHandle = !isGameOnThisList ? onClick(list) : undefined;
         const className = isGameOnThisList
@@ -91,7 +91,7 @@ const AddGameToListModal: React.FC<Props> = ({ isModalVisible, handleModal, game
           </div>
         );
       }),
-    [data, game.list, onClick]
+    [data, onClick, gameList]
   );
 
   const modalContent = useMemo(() => {
@@ -119,11 +119,11 @@ const AddGameToListModal: React.FC<Props> = ({ isModalVisible, handleModal, game
 
   const modalTitle = useMemo(() => {
     const hasToken = localStorage.getItem('token') || false;
-    const addOrMoveString = game.list?.id ? 'move' : 'add';
+    const addOrMoveString = gameList?.id ? 'move' : 'add';
     return hasToken
       ? `Select a list to ${addOrMoveString} this game`
       : 'Create an account to save a game to your list';
-  }, [game.list]);
+  }, [gameList]);
 
   return (
     <Modal

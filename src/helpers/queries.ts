@@ -48,7 +48,6 @@ export const ADD_GAME = gql`
     $coverURL: String!
     $genres: [ID]!
     $platforms: [ID]!
-    $similarGames: [ID]!
   ) {
     addOrMoveGameToList(
       gameId: $gameId
@@ -57,7 +56,6 @@ export const ADD_GAME = gql`
       coverURL: $coverURL
       genres: $genres
       platforms: $platforms
-      similarGames: $similarGames
     ) {
       id
       list {
@@ -84,20 +82,22 @@ export const SEARCH_GAME = gql`
       offset: $offset
     ) {
       count
-      games {
+      gamesAndList {
         id
-        name
-        coverURL
-        genres {
+        gameInfo {
           id
           name
+          coverURL
+          genres {
+            id
+            name
+          }
+          platforms {
+            id
+            name
+            abbreviation
+          }
         }
-        platforms {
-          id
-          name
-          abbreviation
-        }
-        similarGames
         list {
           id
           name
@@ -123,20 +123,22 @@ export const GET_GAMES_FROM_LIST = gql`
       offset: $offset
     ) {
       count
-      games {
+      gamesAndList {
         id
-        name
-        coverURL
-        genres {
+        gameInfo {
           id
           name
+          coverURL
+          genres {
+            id
+            name
+          }
+          platforms {
+            id
+            name
+            abbreviation
+          }
         }
-        platforms {
-          id
-          name
-          abbreviation
-        }
-        similarGames
         list {
           id
           name

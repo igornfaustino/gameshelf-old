@@ -4,7 +4,7 @@ export interface Platform {
   abbreviation?: string;
 }
 
-export interface Genres {
+export interface Genre {
   id: string;
   name: string;
 }
@@ -14,20 +14,16 @@ export interface List {
   name?: number;
 }
 
-export interface GameType {
-  id: string;
-  name: string;
-  coverURL?: string;
-  genresId?: number[];
-  genres?: Genres[];
-  platforms?: Platform[];
-  platformsId?: number[];
-  similarGames?: number[];
+export interface GameAndList {
+  id: number;
   list?: List;
+  gameInfo: GameSimplified;
 }
 
-export interface GameAndList {
-  gameId: number;
-  userList?: string;
-  listId?: string;
+export interface GameSimplified {
+  id: number;
+  name: string;
+  coverURL?: string;
+  genres?: Genre[];
+  platforms?: Platform[];
 }

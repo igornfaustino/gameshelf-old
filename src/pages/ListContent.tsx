@@ -3,7 +3,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { Button } from 'antd';
 import { useQuery } from '@apollo/client';
 
-import { GameType, GameAndList } from '../types/common';
+import { GameAndList } from '../types/common';
 import GamesDisplay from '../components/GamesDisplay';
 import { GET_GAMES_FROM_LIST } from '../helpers/queries';
 import FilterForm from '../components/FilterForm';
@@ -16,20 +16,16 @@ interface ListContentType {
 
 interface Query {
   getGamesFromList: {
-    games: GameType[];
+    gamesAndList: GameAndList[];
     count: number;
   };
-}
-
-interface StateType {
-  gameAndList: GameAndList[];
 }
 
 const LIMIT = 30;
 
 const ListContent: React.FC<ListContentType> = ({ listId }) => {
   const [offset, setOffset] = useState(0);
-  const [games, setGames] = useState<GameType[]>([]);
+  const [gamesAndList, setGamesAndList] = useState<GameAndList[]>([]);
   const [platforms, setPlatforms] = useState<undefined | number[]>(undefined);
   const [genres, setGenres] = useState<undefined | number[]>(undefined);
 
@@ -76,11 +72,11 @@ const ListContent: React.FC<ListContentType> = ({ listId }) => {
         </div>
       ) : (
         <>
-          <GamesDisplay games={games} isGamesOnList />
+          <GamesDisplay gamesAndList={gamesAndList} isGamesOnList />
           <div className={styles.pages}>{pagination}</div>
         </>
       ),
-    [games, loading, pagination]
+    [gamesAndList, loading, pagination]
   );
 
   useEffect(() => {
@@ -89,9 +85,16 @@ const ListContent: React.FC<ListContentType> = ({ listId }) => {
   }, [platforms, genres, listId]);
 
   useEffect(() => {
-    const gamesOnList = data?.getGamesFromList.games;
-    if (!gamesOnList) return setGames([]);
-    return setGames(gamesOnList.filter((game) => Number(game.list?.id) === Number(listId)));
+    if (!error) return;
+    console.log({ error });
+  });
+
+  useEffect(() => {
+    const gamesAndListData = data?.getGamesFromList.gamesAndList;
+    if (!gamesAndListData) return setGamesAndList([]);
+    return setGamesAndList(
+      gamesAndListData.filter(({ list }) => Number(list?.id) === Number(listId))
+    );
   }, [data, listId]);
 
   return (
